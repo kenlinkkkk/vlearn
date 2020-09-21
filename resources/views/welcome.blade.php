@@ -97,44 +97,40 @@
             <nav>
                 <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist">
                     @foreach($packages as $item)
-                        @if(!empty($item->packages))
-                            <a class="nav-item nav-link {{ $loop->first ? 'active' : '' }}" id="nav-{{ $item->package_code }}-tab" data-toggle="tab" href="#nav-{{ $item->package_code }}" role="tab" aria-controls="nav-{{ $item->package_code }}" aria-selected="true">{{ $item->name }}</a>
-                        @endif
+                        <a class="nav-item nav-link {{ $loop->first ? 'active' : '' }}" id="nav-{{ $item->package_code }}-tab" data-toggle="tab" href="#nav-{{ $item->package_code }}" role="tab" aria-controls="nav-{{ $item->package_code }}" aria-selected="true">{{ $item->name }}</a>
                     @endforeach
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 @foreach($packages as $item)
-                    @if(!empty($item->packages))
                     <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="nav-{{ $item->package_code }}" role="tabpanel" aria-labelledby="nav-{{ $item->package_code }}-tab">
-                    <section class="testimony-section pt-3">
-                        <div class="container">
-                            <div class="row ftco-animate">
-                                <div class="col-md-12">
-                                    <div class="carousel-testimony owl-carousel ftco-owl">
-                                        @if(!empty($item->packages))
-                                            @foreach($item->packages as $item)
-                                                <div class="item text-center">
-                                                    <div class="testimony-wrap p-4 pb-5">
-                                                        <div class="user-img mb-4" style="background-image: url('{{ $item->picture ? asset($item->picture) : asset('assets/client/img/images/students-in-class-1.png') }}')">
-                                                            <span class="quote d-flex align-items-center justify-content-center">
-                                                              <i class="icon-quote-left"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="text">
-                                                            <p class="name">{{ $item->name }}</p>
-                                                            <span class="position">{{ $item->price }} VNĐ</span>
+                        <section class="testimony-section pt-3">
+                            <div class="container">
+                                <div class="row ftco-animate">
+                                    <div class="col-md-12">
+                                        <div class="carousel-testimony owl-carousel ftco-owl">
+                                            @if(!empty($item->packages))
+                                                @foreach($item->packages as $item)
+                                                    <div class="item text-center">
+                                                        <div class="testimony-wrap p-4 pb-5">
+                                                            <div class="user-img mb-4" style="background-image: url('{{ $item->picture ? asset($item->picture) : asset('assets/client/img/images/students-in-class-1.png') }}')">
+                                                                <span class="quote d-flex align-items-center justify-content-center">
+                                                                  <i class="icon-quote-left"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="text">
+                                                                <p class="name">{{ $item->name }}</p>
+                                                                <span class="position">{{ $item->price }} VNĐ</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        @endif
+                                                @endforeach
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                    @endif
+                        </section>
                     </div>
                 @endforeach
             </div>

@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <label>Nội dung <span class="text-danger">(*)</span></label>
-                        <textarea class="form-control" name="description" required>{!! $package->description !!}</textarea>
+                        <textarea id="elm1" class="form-control" name="description" required>{!! $package->description !!}</textarea>
                         <p class="text-danger">Trường (*) là bắt buộc</p>
                         <div class="form-group d-flex justify-content-end">
                             <button type="submit" name="submit" class=" m-2 btn btn-sm btn-success">Thêm mới</button>

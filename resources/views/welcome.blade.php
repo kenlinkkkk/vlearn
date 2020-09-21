@@ -103,6 +103,7 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 @foreach($packages as $item)
+                    @if(!empty($item->packages))
                     <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="nav-{{ $item->package_code }}" role="tabpanel" aria-labelledby="nav-{{ $item->package_code }}-tab">
                     <section class="testimony-section pt-3">
                         <div class="container">
@@ -131,6 +132,7 @@
                             </div>
                         </div>
                     </section>
+                    @endif
                     </div>
                 @endforeach
             </div>

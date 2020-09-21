@@ -39,11 +39,11 @@ class PackageController extends Controller
     public function edit($package_id)
     {
         $package = $this->packageEloquentRepository->find($package_id);
-
+        $packages = Package::where('fa_package', '=', 0)->where('status', '=', 1)->get();
         $data = compact(
-            'package'
+            'package',
+            'packages'
         );
-
         return view('admin.package.edit', $data);
     }
 

@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Repositories\Admin\PackageEloquentRepository;
 use App\Repositories\Admin\PageEloquentRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -28,5 +29,18 @@ class HomeController extends Controller
         );
 
         return view('welcome', $data);
+    }
+
+    public function regSubmit(Request $request)
+    {
+        $data = $request->except('_token');
+        $url = 'http://mskill.vn/dangky/api/register.jsp?serviceId=30&sub='. $data['package'];
+
+        return Redirect::away($url);
+    }
+
+    public function backUrl(Request $request)
+    {
+
     }
 }

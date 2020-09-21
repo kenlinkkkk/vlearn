@@ -68,9 +68,11 @@
                                 <div class="custom-file">
                                     <select name="publish" class="custom-select">
                                         <option value="0" {{ $package->fa_package == 0 ? 'selected' : '' }}>Không</option>
-                                        @foreach($packages as $item)
-                                            <option value="{{ $item->id }}" {{ $package->fa_package == $item->package->id ? 'selected' : '' }}>{{ $item->name }}</option>
-                                        @endforeach
+                                        @if(count($packages) > 0)
+                                            @foreach($packages as $item)
+                                                <option value="{{ $item->id }}" {{ $package->fa_package == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>

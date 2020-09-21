@@ -49,7 +49,8 @@
                                 <td>{{ $item->name }}</td>
                                 <td class="text-justify">{{ $item->package_code }}</td>
                                 <td>{{ $item->price }}</td>
-                                <td class="text-right">{{ $item->package->name }}</td>
+                                <td></td>
+{{--                                <td class="text-right">{{ $item->package->name }}</td>--}}
                                 <td>Trạng thái</td>
                                 <td class="text-right">
                                     <form id="form-{{ $item->id }}" method="post" action="{{ route('admin.package.update', [$item->id]) }}">

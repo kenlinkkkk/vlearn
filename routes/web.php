@@ -44,4 +44,5 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/')->name('home.')->group(function () {
     Route::get('/', 'Home\HomeController@index')->name('index');
+    Route::post('/reg', 'Home\HomeController@regSubmit')->name('reg');
 });

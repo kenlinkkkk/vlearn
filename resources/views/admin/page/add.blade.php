@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label>Short tag</label>
-                            <input type="text" class="form-control" name="short_tag">
+                            <input type="text" class="form-control" name="slug">
                         </div>
                         <div class="form-group">
                             <label>Vị trí hiển thị</label>

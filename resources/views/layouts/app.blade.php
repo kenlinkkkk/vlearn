@@ -66,6 +66,14 @@
 
 <script src="{{ asset('assets/client/js/main2.js') }}"></script>
 
+<script>
+    $(document).ready(function() {
+        $(window).on('hashchange', function(e){
+            history.replaceState ("", document.title, e.originalEvent.oldURL);
+        });
+    })
+</script>
+
 @yield('script')
 </body>
 </html>

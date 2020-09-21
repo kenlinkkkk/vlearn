@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label>Short tag</label>
-                            <input type="text" class="form-control" name="short_tag">
+                            <input type="text" class="form-control" name="slug">
                         </div>
                         <div class="form-group">
                             <label>Ảnh nền <span class="text-danger">(*)</span></label>
@@ -66,7 +66,7 @@
                             <div class="col-sm-12 col-md-3">
                                 <label>Gói lẻ <span class="text-danger">(*)</span></label>
                                 <div class="custom-file">
-                                    <select name="publish" class="custom-select">
+                                    <select class="custom-select" name="fa_package">
                                         <option value="0" selected>Không</option>
                                         @foreach($packages as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>

@@ -19,7 +19,7 @@ $(document).ready(function () {
         ],
         image_title: true,
         automatic_uploads: true,
-        images_upload_url: '/admin/user/upload',
+        images_upload_url: '/admin/upload',
         file_picker_types: 'image',
         convert_urls: false,
         file_picker_callback: function(cb, value, meta) {
@@ -45,20 +45,4 @@ $(document).ready(function () {
             input.click();
         }
     });
-
-    $("#elm2").length && tinymce.init({
-        selector: "textarea#elm2",
-        height: 200,
-        setup: function (editor) {
-            editor.on('init change', function () {
-                editor.save();
-            });
-        },
-        plugins: [],
-        toolbar: "",
-        content_css: [
-            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-            '//www.tinymce.com/css/codepen.min.css'
-        ]
-    })
 });

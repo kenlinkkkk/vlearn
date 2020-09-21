@@ -21,7 +21,11 @@ class HomeController extends Controller
     public function index()
     {
         $pages = Page::where('status', '=', 1)->get();
-        $packages = Package::where('status', '=', 1)->with('package')->get();
+        $packages = Package::where('status', '=', 1)->where('fa_package', '=', 0)->with('packages')->get();
+        foreach ($pages as $item) {
+            $position = json_decode($item->position);
+            $item->position = $position;
+        }
 
         $data = compact(
             'pages',
@@ -42,5 +46,21 @@ class HomeController extends Controller
     public function backUrl(Request $request)
     {
 
+    }
+
+    public function showPage(Request $request, $page_slug)
+    {
+        $pages = Page::where('status', '=', 1)->get();
+        foreach ($pages as $item) {
+            $position = json_decode($item->position);
+            $item->position = $position;
+        }
+        $page = Page::where('slug', '=', $page_slug)->where('status', '=', 1)->first();
+        $data = compact(
+            'page',
+            'pages'
+        );
+
+        return view('client.showpage', $data);
     }
 }

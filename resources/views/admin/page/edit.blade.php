@@ -35,16 +35,16 @@
                         </div>
                         <div class="form-group">
                             <label>Short tag</label>
-                            <input type="text" class="form-control" name="short_tag" value="{{ $page->slug }}" readonly>
+                            <input type="text" class="form-control" name="slug" value="{{ $page->slug }}" readonly>
                         </div>
                         <div class="form-group">
                             <label>Vị trí hiển thị</label>
                             <div class="custom-control custom-checkbox custom-checkbox-info mb-3">
-                                <input type="checkbox" class="custom-control-input" id="customCheckcolor1" name="position[]" value="footer">
+                                <input type="checkbox" class="custom-control-input" id="customCheckcolor1" name="position[]" value="footer" {{ in_array('footer', $page->position) ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="customCheckcolor1">Navbar</label>
                             </div>
                             <div class="custom-control custom-checkbox custom-checkbox-info mb-3">
-                                <input type="checkbox" class="custom-control-input" id="customCheckcolor2" name="position[]" value="navbar">
+                                <input type="checkbox" class="custom-control-input" id="customCheckcolor2" name="position[]" value="navbar" {{ in_array('navbar', $page->position) ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="customCheckcolor2">Footer</label>
                             </div>
                         </div>

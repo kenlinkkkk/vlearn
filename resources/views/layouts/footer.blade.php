@@ -25,7 +25,13 @@
         </div>
         <div class="row">
             <div class="col-md-8">
-
+                <ul class="list-unstyled d-inline-flex">
+                    @foreach($pages as $item)
+                        @if (in_array('footer', $item->position))
+                            <li class="pl-3"><a href="{{ route('home.show-page', [$item->slug]) }}" class="py-2 d-block">{{ $item->title }}</a></li>
+                        @endif
+                    @endforeach
+                </ul>
             </div>
             <div class="col-md-4 text-center">
                 <p>

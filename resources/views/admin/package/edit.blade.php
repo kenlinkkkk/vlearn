@@ -35,12 +35,12 @@
                         </div>
                         <div class="form-group">
                             <label>Short tag</label>
-                            <input type="text" class="form-control" name="short_tag" value="{{ $package->slug }}" readonly>
+                            <input type="text" class="form-control" name="slug" value="{{ $package->slug }}" readonly>
                         </div>
                         <div class="form-group">
                             <label>Ảnh nền <span class="text-danger">(*)</span></label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" name="picture" required>
+                                <input type="file" class="custom-file-input" id="customFile" name="picture">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                             <div class="col-sm-12 col-md-3">
                                 <label>Gói lẻ <span class="text-danger">(*)</span></label>
                                 <div class="custom-file">
-                                    <select name="publish" class="custom-select">
+                                    <select name="fa_package" class="custom-select">
                                         <option value="0" {{ $package->fa_package == 0 ? 'selected' : '' }}>Không</option>
                                         @if(count($packages) > 0)
                                             @foreach($packages as $item)

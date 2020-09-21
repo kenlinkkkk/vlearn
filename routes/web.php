@@ -20,8 +20,9 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::prefix('/admin')->name('admin.')->group(function () {
         Route::get('/admin-profile', 'Admin\UserController@index')->name('profile');
-        Route::post('/change-password', 'Admin\UserController@changePassword')->name('change.password');
 
+        Route::post('/change-password', 'Admin\UserController@changePassword')->name('change.password');
+        Route::post('/upload', 'Admin\PageController@upload')->name('upload');
         Route::prefix('/page')->name('page.')->group(function () {
             Route::get('/', 'Admin\PageController@index')->name('index');
             Route::get('/add', 'Admin\PageController@add')->name('add');
@@ -44,5 +45,8 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/')->name('home.')->group(function () {
     Route::get('/', 'Home\HomeController@index')->name('index');
+    Route::get('/backurl', 'Home\HomeController@backUrl')->name('back-url');
+    Route::get('/{page_slug}', 'Home\HomeController@showPage')->name('show-page');
+
     Route::post('/reg', 'Home\HomeController@regSubmit')->name('reg');
 });

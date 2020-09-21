@@ -14,11 +14,11 @@ class Package extends Model
 
     public function packages()
     {
-        return $this->belongsTo(Package::class, 'fa_package');
+        return $this->hasMany(Package::class, 'fa_package');
     }
 
     public function package()
     {
-        return $this->hasMany(Package::class, 'fa_package');
+        return $this->belongsTo(Package::class, 'fa_package');
     }
 }

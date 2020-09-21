@@ -14,7 +14,8 @@
         "laravel/tinker": "^1.0",
         "spatie/laravel-permission": "^3.17",
       "ext-mcrypt": "*",
-        "ext-openssl": "*"
+        "ext-openssl": "*",
+      "ext-json": "*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

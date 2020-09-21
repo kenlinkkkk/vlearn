@@ -7,6 +7,7 @@ use App\Repositories\Admin\PackageEloquentRepository;
 use App\Repositories\Admin\PageEloquentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Throwable;
 
 class PageController extends Controller
 {
@@ -18,6 +19,10 @@ class PageController extends Controller
     public function index()
     {
         $pages = $this->pageEloquentRepository->getAll();
+        foreach ($pages as $item) {
+            $position = json_decode($item->position);
+            $item->position = $position;
+        }
 
         $data = compact(
             'pages'
@@ -34,6 +39,7 @@ class PageController extends Controller
     public function edit($page_id)
     {
         $page = $this->pageEloquentRepository->find($page_id);
+        $page->position = json_decode($page->position);
 
         $data = compact(
             'page'
@@ -45,20 +51,23 @@ class PageController extends Controller
     public function create(Request $request)
     {
         $data = $request->except('_token');
-        $data['slug'] = url_slug($data['title']);
-
-        try {
-            $result = $this->pageEloquentRepository->create($data);
-        } catch (\Exception $exception) {
-            report($exception);
+        if (empty($data['slug'])) {
+            $data['slug'] = url_slug($data['title']);
         }
 
-        if ($result) {
-            session()->flash('success', 'Thêm mới thành công');
-            return Redirect::route('admin.page.index');
-        } else {
-            session()->flash('error', 'Thêm mới thất bại');
-            return Redirect::back();
+        $data['position'] = json_encode($data['position']);
+        try {
+            $result = $this->pageEloquentRepository->create($data);
+
+            if ($result) {
+                session()->flash('success', 'Thêm mới thành công');
+                return Redirect::route('admin.page.index');
+            } else {
+                session()->flash('error', 'Thêm mới thất bại');
+                return Redirect::back();
+            }
+        } catch (Throwable $exception) {
+            return report($exception);
         }
     }
 
@@ -68,21 +77,26 @@ class PageController extends Controller
 
         try {
             $result = $this->pageEloquentRepository->update($page_id, $data);
-        } catch (\Exception $exception) {
-            report($exception);
-        }
 
-        if ($result) {
-            session()->flash('success', 'Cập nhật thành công');
-            return Redirect::route('admin.page.index');
-        } else {
-            session()->flash('error', 'Cập nhật thất bại');
-            return Redirect::back();
+            if ($result) {
+                session()->flash('success', 'Cập nhật thành công');
+                return Redirect::route('admin.page.index');
+            } else {
+                session()->flash('error', 'Cập nhật thất bại');
+                return Redirect::back();
+            }
+        } catch (Throwable $exception) {
+            return report($exception);
         }
     }
 
-    public function upload()
+    public function upload(Request $request)
     {
+        $file=$request->file('file');
+        $path= url('/uploads/').'/'.$file->getClientOriginalName();
+        $imgpath=$file->move(public_path('/uploads/'),$file->getClientOriginalName());
+        $fileNameToStore= $path;
 
+        return json_encode(['location' => $fileNameToStore]);
     }
 }

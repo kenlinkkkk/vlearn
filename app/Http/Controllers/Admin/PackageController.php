@@ -7,7 +7,7 @@ use App\Models\Package;
 use App\Repositories\Admin\PackageEloquentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use TheSeer\Tokenizer\Exception;
+use Throwable;
 
 class PackageController extends Controller
 {
@@ -18,7 +18,7 @@ class PackageController extends Controller
 
     public function index()
     {
-        $packages = $this->packageEloquentRepository->edge('package');
+        $packages = Package::where('status', '=', 1)->with('package')->get();
 
         $data = compact(
             'packages'
@@ -50,20 +50,32 @@ class PackageController extends Controller
     public function create(Request $request)
     {
         $data = $request->except('_token');
-        $data['slug'] = url_slug($data['name']);
+        if (empty($data['slug'])) {
+            $data['slug'] = url_slug($data['name']);
+        }
+
+        if ($request->hasFile('picture')) {
+            $picture = $request->picture;
+            $filePath = 'uploads/home';
+            $filePath = str_replace('\\', '/', $filePath);
+
+            $picture_name = $picture->getClientOriginalName();
+            $picture->move($filePath, $picture_name);
+            $data['picture'] = $filePath . '/' . $picture_name;
+        }
 
         try {
             $result = $this->packageEloquentRepository->create($data);
-        } catch (Exception $exception) {
-            report($exception);
-        }
 
-        if ($result) {
-            session()->flash('success', 'Thêm mới thành công');
-            return Redirect::route('admin.page.index');
-        } else {
-            session()->flash('error', 'Thêm mới thất bại');
-            return Redirect::back();
+            if ($result) {
+                session()->flash('success', 'Thêm mới thành công');
+            } else {
+                session()->flash('error', 'Thêm mới thất bại');
+            }
+
+            return Redirect::route('admin.package.index');
+        } catch (Throwable $exception) {
+            return  report($exception);
         }
     }
 
@@ -71,18 +83,28 @@ class PackageController extends Controller
     {
         $data = $request->except('_token');
 
-        try {
-            $result = $this->pageEloquentRepository->update($package_id, $data);
-        } catch (\Exception $exception) {
-            report($exception);
+        if ($request->hasFile('picture')) {
+            $picture = $request->picture;
+            $filePath = 'uploads/home';
+            $filePath = str_replace('\\', '/', $filePath);
+
+            $picture_name = $picture->getClientOriginalName();
+            $picture->move($filePath, $picture_name);
+            $data['picture'] = $filePath . '/' . $picture_name;
         }
 
-        if ($result) {
-            session()->flash('success', 'Cập nhật thành công');
-            return Redirect::route('admin.page.index');
-        } else {
-            session()->flash('error', 'Cập nhật thất bại');
-            return Redirect::back();
+        try {
+            $result = $this->packageEloquentRepository->update($package_id, $data);
+
+            if ($result) {
+                session()->flash('success', 'Cập nhật thành công');
+            } else {
+                session()->flash('error', 'Cập nhật thất bại');
+            }
+
+            return Redirect::route('admin.package.index');
+        } catch (Throwable $exception) {
+           return report($exception);
         }
     }
 }

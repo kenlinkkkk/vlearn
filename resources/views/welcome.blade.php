@@ -97,7 +97,9 @@
             <nav>
                 <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist">
                     @foreach($packages as $item)
-                        <a class="nav-item nav-link {{ $loop->first ? 'active' : '' }}" id="nav-{{ $item->package_code }}-tab" data-toggle="tab" href="#nav-{{ $item->package_code }}" role="tab" aria-controls="nav-{{ $item->package_code }}" aria-selected="true">{{ $item->name }}</a>
+                        @if(!empty($item->packages))
+                            <a class="nav-item nav-link {{ $loop->first ? 'active' : '' }}" id="nav-{{ $item->package_code }}-tab" data-toggle="tab" href="#nav-{{ $item->package_code }}" role="tab" aria-controls="nav-{{ $item->package_code }}" aria-selected="true">{{ $item->name }}</a>
+                        @endif
                     @endforeach
                 </div>
             </nav>

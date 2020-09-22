@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Repositories\Admin\PackageEloquentRepository;
 use App\Repositories\Admin\PageEloquentRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
@@ -45,7 +46,9 @@ class HomeController extends Controller
 
     public function backUrl(Request $request)
     {
-
+        $data = $request->get('param');
+        Log::info('MSISDN::Response-param::param='. $data);
+        Redirect::route('home.index');
     }
 
     public function showPage(Request $request, $page_slug)

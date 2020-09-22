@@ -21,7 +21,7 @@ class CreatePackagesTable extends Migration
             $table->string('package_code')->nullable();
             $table->integer('price')->nullable();
             $table->integer('duration')->default(1);
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->integer('fa_package')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();

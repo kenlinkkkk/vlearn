@@ -72,7 +72,6 @@ class PackageController extends Controller
             } else {
                 session()->flash('error', 'Thêm mới thất bại');
             }
-
             return Redirect::route('admin.package.index');
         } catch (Throwable $exception) {
             return  report($exception);

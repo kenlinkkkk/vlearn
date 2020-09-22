@@ -55,14 +55,16 @@ function url_slug($str, $options = array())
 
     return $str . '-'. round(microtime(true) * 1000);
 }
+
 /**
-* @param $key
-* @param $data
-* @return bool|string
-*/
-function aesEncrypt($key, $data, $config) {
+ * @param $key
+ * @param $data
+ * @param null $config
+ * @return bool|string
+ */
+function aesEncrypt($key, $data, $config = null) {
     isset($config['bits']) ? $config['bits'] : $config['bits'] = '128';
-    isset($config['mode']) ? $config['mode'] : $config['mode'] = 'ecb';
+    isset($config['mode']) ? $config['mode'] : $config['mode'] = 'cbc';
 
     $method = 'aes-'. $config['bits'] .'-'. $config['mode'];
 
@@ -72,14 +74,16 @@ function aesEncrypt($key, $data, $config) {
 /**
  * @param $key
  * @param $data
+ * @param null $config
  * @return bool|string
  */
 
-function aesDecrypt($key, $data, $config) {
+function aesDecrypt($key, $data, $config = null) {
     isset($config['bits']) ? $config['bits'] : $config['bits'] = '128';
-    isset($config['mode']) ? $config['mode'] : $config['mode'] = 'ecb';
+    isset($config['mode']) ? $config['mode'] : $config['mode'] = 'cbc';
 
     $method = 'aes-'. $config['bits'] .'-'. $config['mode'];
 
     return openssl_decrypt(base64_decode($data), $method, $key, OPENSSL_RAW_DATA);
 }
+

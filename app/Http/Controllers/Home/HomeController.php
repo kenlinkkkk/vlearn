@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use AES_Encryption;
 use App\Http\Controllers\Controller;
 use App\Models\Package;
 use App\Models\Page;
@@ -47,8 +48,18 @@ class HomeController extends Controller
     public function backUrl(Request $request)
     {
         $data = $request->get('param');
-        Log::info('MSISDN::Response-param::param='. $data);
-        Redirect::route('home.index');
+        if (!empty($data)){
+            $data = str_replace(' ', '+', $data);
+            $aes = new AES_Encryption(config('vlearn.encrypt.key'));
+            $result = json_decode($aes->decrypt(base64_decode($data)));
+            Log::info('MSISDN::Response-param::param='. $data);
+            Log::info('MSISDN::Response-param::msisdn='. $result->result[0]->mobile);
+            session()->put('_user', ['msisdn' => $result->result[0]->mobile]);
+        } else {
+            session()->put('_user', ['msisdn' => 'empty']);
+        }
+
+        return Redirect::route('home.index');
     }
 
     public function showPage(Request $request, $page_slug)

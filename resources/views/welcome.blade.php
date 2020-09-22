@@ -112,7 +112,7 @@
                                             @if(!empty($item->packages))
                                                 @foreach($item->packages as $item)
                                                     <div class="item text-center">
-                                                        <div class="testimony-wrap p-4 pb-5">
+                                                        <div class="testimony-wrap p-4 pb-5" style="height: 320px !important;">
                                                             <div class="user-img mb-4" style="background-image: url('{{ $item->picture ? asset($item->picture) : asset('assets/client/img/images/students-in-class-1.png') }}')">
                                                                 <span class="quote d-flex align-items-center justify-content-center">
                                                                   <i class="icon-quote-left"></i>

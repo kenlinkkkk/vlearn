@@ -58,8 +58,6 @@
 <script src="{{ asset('assets/client/js/jquery.animateNumber.min.js') }}"></script>
 <script src="{{ asset('assets/client/js/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('assets/client/js/scrollax.min.js') }}"></script>
-<script src="{{ asset('assets/client/js/three.r95.min.js') }}"></script>
-<script src="{{ asset('assets/client/js/vanta.net.min.js') }}"></script>
 <script src="{{ asset('assets/client/js/select2/select2.min.js') }}"></script>
 <script src="{{ asset('assets/client/js/main.js') }}"></script>
 

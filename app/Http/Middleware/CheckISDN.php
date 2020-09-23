@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Redirect;
 
 class CheckISDN
 {
@@ -15,6 +16,12 @@ class CheckISDN
      */
     public function handle($request, Closure $next)
     {
+        $link = 'http://mskill.vn/dangky/api/msisdn2.jsp?serviceId=30';
+
+        $user = session()->get('_user');
+        if (empty($user)) {
+            Redirect::away($link);
+        }
         return $next($request);
     }
 }

@@ -56,11 +56,11 @@ class HomeController extends Controller
             Log::info('MSISDN::Response-param::param='. $data);
             Log::info('MSISDN::Response-param::msisdn='. $result->result[0]->mobile);
             session()->put('_user', ['msisdn' => $result->result[0]->mobile]);
+            return Redirect::route('home.index');
         } else {
             session()->put('_user', ['msisdn' => 'empty']);
+            return Redirect::route('home.index');
         }
-
-        return Redirect::route('home.index');
     }
 
     public function showPage(Request $request, $page_slug)

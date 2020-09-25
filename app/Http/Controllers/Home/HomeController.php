@@ -52,6 +52,7 @@ class HomeController extends Controller
             $data = str_replace(' ', '+', $data);
             $aes = new AES_Encryption(config('vlearn.encrypt.key'));
             $result = json_decode($aes->decrypt(base64_decode($data)));
+
             Log::info('MSISDN::Response-param::param='. $data);
             Log::info('MSISDN::Response-param::msisdn='. $result->result[0]->mobile);
             session()->put('_user', ['msisdn' => $result->result[0]->mobile]);

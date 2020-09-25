@@ -36,28 +36,32 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>STT</th>
+                        <th class="hidden-content">STT</th>
                         <th>Loại cước</th>
-                        <th>Mã gói</th>
-                        <th>Giá cước (VNĐ)</th>
-                        <th>Thời hạn sử dụng (ngày)</th>
+                        <th class="hidden-content">Mã gói</th>
+                        <th class="hidden-content">Giá cước (VNĐ)</th>
+                        <th class="hidden-content">Thời hạn sử dụng (ngày)</th>
                         <th>Quyền lợi trên: vlearn.edu.vn</th>
                         <th>Đăng ký</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr class="font-weight-bold">
-                        <td>1</td>
+                        <td class="hidden-content">1</td>
                         <td>Gói cước</td>
-                        <td colspan="5"></td>
+                        <td class="hidden-content"></td>
+                        <td class="hidden-content"></td>
+                        <td class="hidden-content"></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     @foreach($packages as $item)
                         <tr>
-                            <td>1.{{ $loop->index + 1 }}</td>
+                            <td class="hidden-content">1.{{ $loop->index + 1 }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->package_code }}</td>
-                            <td>{{ $item->price }}</td>
-                            <td>{{ $item->duration }}</td>
+                            <td class="hidden-content">{{ $item->package_code }}</td>
+                            <td class="hidden-content">{{ $item->price }}</td>
+                            <td class="hidden-content">{{ $item->duration }}</td>
                             <td>{{ $item->description }}</td>
                             <td>
                                 <form action="{{ route('home.reg') }}" method="POST">
@@ -68,23 +72,32 @@
                             </td>
                         </tr>
                     @endforeach
-                    <tr class="font-weight-bold">
-                        <td>2</td>
+                    <tr class="font-weight-bold hidden-content">
+                        <td class="hidden-content">2</td>
                         <td>Cước mua lẻ</td>
+                        <td class="hidden-content"></td>
+                        <td class="hidden-content">0-100.000</td>
+                        <td class="hidden-content">1</td>
                         <td></td>
-                        <td>0-100.000</td>
-                        <td>1</td>
-                        <td colspan="2"></td>
+                        <td></td>
                     </tr>
-                    <tr class="font-weight-bold">
-                        <td>3</td>
+                    <tr class="font-weight-bold hidden-content">
+                        <td class="hidden-content">3</td>
                         <td>Cước data</td>
-                        <td colspan="5">Tính cước theo quy định khi chưa đăng ký gói thành viên trả phí</td>
+                        <td class="hidden-content">Tính cước theo quy định khi chưa đăng ký gói thành viên trả phí</td>
+                        <td class="hidden-content"></td>
+                        <td class="hidden-content"></td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                    <tr class="font-weight-bold">
-                        <td>4</td>
+                    <tr class="font-weight-bold hidden-content">
+                        <td class="hidden-content">4</td>
                         <td>Cước nhắn tới đầu số 9285</td>
-                        <td colspan="5">Miễn phí</td>
+                        <td class="hidden-content">Miễn phí</td>
+                        <td class="hidden-content"></td>
+                        <td class="hidden-content"></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     </tbody>
                 </table>

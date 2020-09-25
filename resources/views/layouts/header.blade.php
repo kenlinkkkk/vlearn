@@ -11,6 +11,9 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
+                    @if(session()->get('_user')['msisdn'] != 'empty' && !empty(session()->get('_user')['msisdn']))
+                        <li class="nav-item"><a href="#" class="nav-link">Xin chào: {{ '*****'. substr(session()->get('_user')['msisdn'], -3) }}</a></li>
+                    @endif
                     <li class="nav-item"><a href="{{ route('home.index') }}" class="nav-link">Trang chủ</a></li>
                     <li class="nav-item"><a href="#intro" class="nav-link">Giới thiệu</a></li>
                     <li class="nav-item"><a href="#package" class="nav-link">Gói</a></li>

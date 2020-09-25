@@ -20,8 +20,8 @@ class CheckISDN
 
         $user = session()->get('_user');
         if (empty($user)) {
-            Redirect::away($link);
+            return Redirect::away($link);
         }
-        return $next($request);
+//        return $next($request);
     }
 }

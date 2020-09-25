@@ -42,11 +42,12 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
+Route::middleware('isdn')->group(function () {
+    Route::prefix('/')->name('home.')->group(function () {
+        Route::get('/', 'Home\HomeController@index')->name('index');
+        Route::get('/backurl', 'Home\HomeController@backUrl')->name('back-url');
+        Route::get('/{page_slug}', 'Home\HomeController@showPage')->name('show-page');
 
-Route::prefix('/')->name('home.')->group(function () {
-    Route::get('/', 'Home\HomeController@index')->name('index');
-    Route::get('/backurl', 'Home\HomeController@backUrl')->name('back-url');
-    Route::get('/{page_slug}', 'Home\HomeController@showPage')->name('show-page');
-
-    Route::post('/reg', 'Home\HomeController@regSubmit')->name('reg');
+        Route::post('/reg', 'Home\HomeController@regSubmit')->name('reg');
+    });
 });

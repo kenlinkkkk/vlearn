@@ -495,9 +495,26 @@ textarea.input2 + .focus-input2::after {
     opacity: 1;
 }
 
+@media (max-width: 576px) {
+    .hidden-content {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .hidden-content {
+        display: none;
+    }
+}
+
 @media (max-width: 992px) {
+    /*.hidden-content {*/
+    /*    display: block;*/
+    /*}*/
+
     .alert-validate::before {
         visibility: visible;
         opacity: 1;
     }
 }
+

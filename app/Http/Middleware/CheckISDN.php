@@ -16,12 +16,12 @@ class CheckISDN
      */
     public function handle($request, Closure $next)
     {
-        $link = 'http://mskill.vn/dangky/api/msisdn2.jsp?serviceId=30';
+        $link = 'http://dangky.mobiedu.vn/api/msisdn.jsp?serviceId=30';
 
         $user = session()->get('_user');
         if (empty($user)) {
             return Redirect::away($link);
         }
-//        return $next($request);
+        return $next($request);
     }
 }

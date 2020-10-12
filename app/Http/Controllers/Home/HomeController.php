@@ -63,6 +63,45 @@ class HomeController extends Controller
         }
     }
 
+    public function showLogin()
+    {
+        $pages = Page::where('status', '=', 1)->get();
+        $data = compact(
+            'pages'
+        );
+        return view('client.login', $data);
+    }
+
+    public function postLogin(Request $request)
+    {
+        $data = $request->except('_token');
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://10.10.10.125:9098/v1/api/logUse",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "msisdn=". "0". substr($data['phone']),
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/x-www-form-urlencoded"
+            ),
+        ));
+
+        $response = json_decode(curl_exec($curl));
+
+        curl_close($curl);
+        if ($response->code == 1) {
+            session()->put('_user', ['msisdn' => '84'. substr($data['phone'], -9)]);
+        }
+
+        return Redirect::route('home.index');
+    }
+
     public function showPage(Request $request, $page_slug)
     {
         $pages = Page::where('status', '=', 1)->get();

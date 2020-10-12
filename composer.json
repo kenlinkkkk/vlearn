@@ -15,7 +15,8 @@
         "spatie/laravel-permission": "^3.17",
       "ext-mcrypt": "*",
         "ext-openssl": "*",
-      "ext-json": "*"
+      "ext-json": "*",
+      "ext-curl": "*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

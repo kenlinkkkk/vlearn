@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @yield('title')
+    <title>Đăng nhập</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/client/favicon.png') }}"/>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,700,800" rel="stylesheet">
     <link href="{{ asset('assets/client/css/open-iconic-bootstrap.min.css') }}" rel="stylesheet">
@@ -26,17 +26,29 @@
     <link href="{{ asset('assets/client/css/select2/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/client/css/util.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/client/css/main.css') }}" rel="stylesheet">
-
-    @yield('stylesheet')
 </head>
 <body>
-@include('layouts.header')
-
-@yield('content')
-
-@include('layouts.footer')
-
-
+<section class="ftco-section">
+    @include('layouts.header')
+    <div class="hero-wrap js-fullheight">
+        <div class="row">
+            <div class="col-md-4 col-sm-12"></div>
+            <div class="col-md-4 col-sm-12 card">
+                <div class="card-body">
+                    <form method="post" action="{{ route('home.postLogin') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="text" name="phone" class="form-control" placeholder="09232.....">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12"></div>
+        </div>
+    </div>
+</section>
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen">
     <svg class="circular" width="48px" height="48px">
@@ -69,7 +81,5 @@
         });
     })
 </script>
-
-@yield('script')
 </body>
 </html>

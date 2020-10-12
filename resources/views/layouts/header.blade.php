@@ -22,7 +22,9 @@
                             <li class="nav-item"><a href="{{ route('home.show-page', [$item->slug]) }}" class="nav-link">{{ $item->title }}</a></li>
                         @endif
                     @endforeach
-                    <li class="nav-item"><a href="https://vlearn.edu.vn/auth/login?returnUrl=%2F" class="nav-link"><span>Đăng nhập</span></a></li>
+                    @if(session()->get('_user')['msisdn'] == 'empty' && empty(session()->get('_user')['msisdn']))
+                            <li class="nav-item"><a href="{{ route('home.showLogin') }}" class="nav-link"><span>Đăng nhập</span></a></li>
+                    @endif
                 </ul>
             </div>
         </div>

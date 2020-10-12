@@ -22,7 +22,7 @@
                             <li class="nav-item"><a href="{{ route('home.show-page', [$item->slug]) }}" class="nav-link">{{ $item->title }}</a></li>
                         @endif
                     @endforeach
-                    <li class="nav-item"><a href="" class="nav-link"><span>Đăng nhập</span></a></li>
+                    <li class="nav-item"><a href="https://vlearn.edu.vn/auth/login?returnUrl=%2F" class="nav-link"><span>Đăng nhập</span></a></li>
                 </ul>
             </div>
         </div>

@@ -22,7 +22,7 @@
                             <li class="nav-item"><a href="{{ route('home.show-page', [$item->slug]) }}" class="nav-link">{{ $item->title }}</a></li>
                         @endif
                     @endforeach
-                    @if(session()->get('_user')['msisdn'] == 'empty' && empty(session()->get('_user')['msisdn']))
+                    @if(session()->get('_user')['msisdn'] == 'empty' || empty(session()->get('_user')['msisdn']))
                             <li class="nav-item"><a href="{{ route('home.showLogin') }}" class="nav-link"><span>Đăng nhập</span></a></li>
                     @endif
                 </ul>

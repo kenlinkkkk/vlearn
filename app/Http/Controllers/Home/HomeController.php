@@ -107,7 +107,7 @@ class HomeController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "msisdn=". "0". substr($data['phone']),
+            CURLOPT_POSTFIELDS => "msisdn=". "0". substr($data['phone'], -9),
             CURLOPT_HTTPHEADER => array(
                 "Content-Type: application/x-www-form-urlencoded"
             ),

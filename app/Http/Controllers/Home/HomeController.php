@@ -119,7 +119,8 @@ class HomeController extends Controller
         if ($response->code == 1) {
             session()->put('_user', ['msisdn' => '84'. substr($data['phone'], -9)]);
         }
-
+        dd($response);
+        die();
         return Redirect::route('home.index');
     }
 

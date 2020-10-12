@@ -28,8 +28,8 @@
     <link href="{{ asset('assets/client/css/main.css') }}" rel="stylesheet">
 </head>
 <body>
+@include('layouts.header')
 <section class="ftco-section">
-    @include('layouts.header')
     <div class="hero-wrap js-fullheight">
         <div class="row">
             <div class="col-md-4 col-sm-12"></div>

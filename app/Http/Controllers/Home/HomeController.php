@@ -56,6 +56,27 @@ class HomeController extends Controller
             Log::info('MSISDN::Response-param::param='. $data);
             Log::info('MSISDN::Response-param::msisdn='. $result->result[0]->mobile);
             session()->put('_user', ['msisdn' => $result->result[0]->mobile]);
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "http://10.10.10.125:9098/v1/api/logUse",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => "msisdn=". "0". substr($result->result[0]->mobile, -9),
+                CURLOPT_HTTPHEADER => array(
+                    "Content-Type: application/x-www-form-urlencoded"
+                ),
+            ));
+
+            $response = json_decode(curl_exec($curl));
+
+            curl_close($curl);
             return Redirect::route('home.index');
         } else {
             session()->put('_user', ['msisdn' => 'empty']);

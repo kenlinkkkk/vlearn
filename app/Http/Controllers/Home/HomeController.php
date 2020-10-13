@@ -56,6 +56,33 @@ class HomeController extends Controller
             Log::info('MSISDN::Response-param::param='. $data);
             Log::info('MSISDN::Response-param::msisdn='. $result->result[0]->mobile);
             session()->put('_user', ['msisdn' => $result->result[0]->mobile]);
+//          add package to session
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "http://api.edusite.vn/v1/api/checkSubs",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => "msisdn=". "0". substr($data['phone'], -9),
+                CURLOPT_HTTPHEADER => array(
+                    "Content-Type: application/x-www-form-urlencoded"
+                ),
+            ));
+
+            $response = json_decode(curl_exec($curl));
+
+            curl_close($curl);
+            if ($response->code == 1) {
+                session()->put('_user', ['package' => $response->data]);
+            }
+
+//          add log login to vlearn
 
             $curl = curl_init();
 
@@ -77,6 +104,7 @@ class HomeController extends Controller
             $response = json_decode(curl_exec($curl));
 
             curl_close($curl);
+
             return Redirect::route('home.index');
         } else {
             session()->put('_user', ['msisdn' => 'empty']);
@@ -119,6 +147,31 @@ class HomeController extends Controller
 
         if ($response->code == 1) {
             session()->put('_user', ['msisdn' => '84'. substr($data['phone'], -9)]);
+        }
+
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://api.edusite.vn/v1/api/checkSubs",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "msisdn=". "0". substr($data['phone'], -9),
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/x-www-form-urlencoded"
+            ),
+        ));
+
+        $response = json_decode(curl_exec($curl));
+
+        curl_close($curl);
+        if ($response->code == 1) {
+            session()->put('_user', ['package' => $response->data]);
         }
 
         return Redirect::route('home.index');

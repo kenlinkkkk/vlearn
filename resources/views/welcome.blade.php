@@ -42,7 +42,9 @@
                         <th class="hidden-content">Giá cước (VNĐ)</th>
                         <th class="hidden-content">Thời hạn sử dụng (ngày)</th>
                         <th>Quyền lợi trên: vlearn.edu.vn</th>
-                        <th>Đăng ký</th>
+                        @if(session()->exists('_user'))
+                            <th>Đăng ký</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -53,7 +55,9 @@
                         <td class="hidden-content"></td>
                         <td class="hidden-content"></td>
                         <td></td>
-                        <td></td>
+                        @if (session()->exists('_user'))
+                            <td></td>
+                        @endif
                     </tr>
                     @foreach($packages as $item)
                         <tr>
@@ -63,6 +67,7 @@
                             <td class="hidden-content">{{ $item->price }}</td>
                             <td class="hidden-content">{{ $item->duration }}</td>
                             <td>{{ $item->description }}</td>
+                            @if(session()->exists('_user'))
                             <td>
                                 <form action="{{ route('home.reg') }}" method="POST">
                                     @csrf
@@ -70,6 +75,8 @@
                                     <button type="submit" class="btn btn-sm btn-primary">Đăng ký ngay</button>
                                 </form>
                             </td>
+                            @endif
+
                         </tr>
                     @endforeach
                     <tr class="font-weight-bold hidden-content">
@@ -79,7 +86,9 @@
                         <td class="hidden-content">0-100.000</td>
                         <td class="hidden-content">1</td>
                         <td></td>
-                        <td></td>
+                        @if (session()->exists('_user'))
+                            <td></td>
+                        @endif
                     </tr>
                     <tr class="font-weight-bold hidden-content">
                         <td class="hidden-content">3</td>
@@ -88,7 +97,9 @@
                         <td class="hidden-content"></td>
                         <td class="hidden-content"></td>
                         <td></td>
-                        <td></td>
+                        @if (session()->exists('_user'))
+                            <td></td>
+                        @endif
                     </tr>
                     <tr class="font-weight-bold hidden-content">
                         <td class="hidden-content">4</td>
@@ -97,7 +108,9 @@
                         <td class="hidden-content"></td>
                         <td class="hidden-content"></td>
                         <td></td>
-                        <td></td>
+                        @if (session()->exists('_user'))
+                            <td></td>
+                        @endif
                     </tr>
                     </tbody>
                 </table>

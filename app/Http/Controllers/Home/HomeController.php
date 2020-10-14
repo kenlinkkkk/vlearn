@@ -58,29 +58,12 @@ class HomeController extends Controller
             session()->put('_user', ['msisdn' => $result->result[0]->mobile]);
 //          add package to session
 
-            $curl = curl_init();
+            $response = $this->getPackageSubs(session()->get('_user')['msisdn']);
 
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "http://api.edusite.vn/v1/api/checkSubs",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "msisdn=". "0". substr($data['phone'], -9),
-                CURLOPT_HTTPHEADER => array(
-                    "Content-Type: application/x-www-form-urlencoded"
-                ),
-            ));
-
-            $response = json_decode(curl_exec($curl));
-
-            curl_close($curl);
-            if ($response->code == 1) {
-                session()->put('_user', ['package' => $response->data]);
-            }
+            session()->put('_user', [
+                'msisdn' => session()->get('_user')['msisdn'],
+                'packages' => $response
+            ]);
 
 //          add log login to vlearn
 
@@ -149,30 +132,13 @@ class HomeController extends Controller
             session()->put('_user', ['msisdn' => '84'. substr($data['phone'], -9)]);
         }
 
+        $response = $this->getPackageSubs(session()->get('_user')['msisdn']);
 
-        $curl = curl_init();
+        session()->put('_user', [
+            'msisdn' => session()->get('_user')['msisdn'],
+            'packages' => $response
+        ]);
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://api.edusite.vn/v1/api/checkSubs",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "msisdn=". "0". substr($data['phone'], -9),
-            CURLOPT_HTTPHEADER => array(
-                "Content-Type: application/x-www-form-urlencoded"
-            ),
-        ));
-
-        $response = json_decode(curl_exec($curl));
-
-        curl_close($curl);
-        if ($response->code == 1) {
-            session()->put('_user', ['package' => $response->data]);
-        }
 
         return Redirect::route('home.index');
     }
@@ -191,5 +157,37 @@ class HomeController extends Controller
         );
 
         return view('client.showpage', $data);
+    }
+
+    private function getPackageSubs($msisdn) {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://api.edusite.vn/v1/api/checkSubs",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "msisdn=". "0". substr($msisdn, -9),
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/x-www-form-urlencoded"
+            ),
+        ));
+
+        $response = json_decode(curl_exec($curl));
+
+        curl_close($curl);
+        $pkg = [];
+        if ($response->code == 1) {
+            foreach ($response->data as $item) {
+                if ($item->status == 1) {
+                    array_push($pkg, $item->packageCode);
+                }
+            }
+        }
+        return $pkg;
     }
 }

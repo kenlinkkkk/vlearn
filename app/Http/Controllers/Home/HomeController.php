@@ -28,6 +28,14 @@ class HomeController extends Controller
             $position = json_decode($item->position);
             $item->position = $position;
         }
+        if (session()->get('_user')['msisdn'] != 'empty') {
+            $response = $this->getPackageSubs(session()->get('_user')['msisdn']);
+
+            session()->put('_user', [
+                'msisdn' => session()->get('_user')['msisdn'],
+                'packages' => $response
+            ]);
+        }
 
         $data = compact(
             'pages',

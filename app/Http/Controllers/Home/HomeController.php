@@ -69,7 +69,7 @@ class HomeController extends Controller
 
             session()->put('_user', [
                 'msisdn' => session()->get('_user')['msisdn'],
-                'packages' => ''
+                'packages' => $response
             ]);
 
 //          add log login to vlearn
@@ -97,7 +97,7 @@ class HomeController extends Controller
 
             return Redirect::route('home.index');
         } else {
-            session()->put('_user', ['msisdn' => 'empty']);
+            session()->put('_user', ['msisdn' => 'empty', 'packages' => 'empty']);
             return Redirect::route('home.index');
         }
     }

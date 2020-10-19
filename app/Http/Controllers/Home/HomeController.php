@@ -41,7 +41,6 @@ class HomeController extends Controller
             'pages',
             'packages'
         );
-
         return view('welcome', $data);
     }
 

@@ -42,7 +42,7 @@
                         <th class="hidden-content">Giá cước (VNĐ)</th>
                         <th class="hidden-content">Thời hạn sử dụng (ngày)</th>
                         <th>Quyền lợi trên: vlearn.edu.vn</th>
-                        @if(session()->exists('_user'))
+                        @if(session()->get('_user.packages') != 'empty')
                             <th>Đăng ký</th>
                         @endif
                     </tr>
@@ -55,7 +55,7 @@
                         <td class="hidden-content"></td>
                         <td class="hidden-content"></td>
                         <td></td>
-                        @if (session()->exists('_user'))
+                        @if (session()->get('_user.packages') != 'empty')
                             <td></td>
                         @endif
                     </tr>

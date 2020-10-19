@@ -69,7 +69,7 @@ class HomeController extends Controller
 
             session()->put('_user', [
                 'msisdn' => session()->get('_user')['msisdn'],
-                'packages' => $response
+                'packages' => ''
             ]);
 
 //          add log login to vlearn

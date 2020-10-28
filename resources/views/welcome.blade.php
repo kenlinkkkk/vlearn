@@ -27,8 +27,25 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center">
-                <a class="btn btn-lg btn-primary" href="https://vlearn.edu.vn/auth/login">Vào học</a>
+            <div id="customButton" class="d-flex align-content-center">
+                <a href="https://vlearn.edu.vn/auth/login">
+                    <svg class="icon-arrow before">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                    <span class="label">Vào học</span>
+                    <svg class="icon-arrow after">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                </a>
+
+                <svg style="display: none;">
+                    <defs>
+                        <symbol id="arrow" viewBox="0 0 35 15">
+                            <title>Arrow</title>
+                            <path style="fill: #ee76ad" d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z "/>
+                        </symbol>
+                    </defs>
+                </svg>
             </div>
         </div>
     </section>

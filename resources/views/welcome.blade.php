@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center">
-                <a class="btn btn-lg btn-primary" href="https://vlearn.edu.vn/auth/login">Học ngay</a>
+                <a class="btn btn-lg btn-primary" href="https://vlearn.edu.vn/auth/login">Vào học</a>
             </div>
         </div>
     </section>

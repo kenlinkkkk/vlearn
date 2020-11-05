@@ -86,7 +86,7 @@
                             <td class="hidden-content">{{ $item->package_code }}</td>
                             <td class="hidden-content">{{ $item->price }}</td>
                             <td class="hidden-content">{{ $item->duration }}</td>
-                            <td>{{ $item->description }}</td>
+                            <td>{!! $item->description !!}</td>
                             @if(session()->get('_user.packages') != 'empty')
                                 @if (!is_numeric(array_search($item->package_code, session()->get('_user')['packages'])))
                                     <td>

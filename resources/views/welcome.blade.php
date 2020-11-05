@@ -112,7 +112,7 @@
                         <td class="hidden-content">0-100.000</td>
                         <td class="hidden-content">1</td>
                         <td></td>
-                        @if (session()->exists('_user'))
+                        @if (session()->get('_user.packages') != 'empty')
                             <td></td>
                         @endif
                     </tr>
@@ -123,7 +123,7 @@
                         <td class="hidden-content"></td>
                         <td class="hidden-content"></td>
                         <td></td>
-                        @if (session()->exists('_user'))
+                        @if (session()->get('_user.packages') != 'empty')
                             <td></td>
                         @endif
                     </tr>
@@ -134,7 +134,7 @@
                         <td class="hidden-content"></td>
                         <td class="hidden-content"></td>
                         <td></td>
-                        @if (session()->exists('_user'))
+                        @if (session()->get('_user.packages') != 'empty')
                             <td></td>
                         @endif
                     </tr>

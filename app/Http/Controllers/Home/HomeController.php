@@ -29,14 +29,13 @@ class HomeController extends Controller
             $item->position = $position;
         }
 
-        if (session()->get('_user')['msisdn'] != 'empty') {
-            $response = $this->getPackageSubs(session()->get('_user')['msisdn']);
-            var_dump($response);
-            session()->put('_user', [
-                'msisdn' => session()->get('_user')['msisdn'],
-                'packages' => $response
-            ]);
-        }
+//        if (session()->get('_user')['msisdn'] != 'empty') {
+//            $response = $this->getPackageSubs(session()->get('_user')['msisdn']);
+//            session()->put('_user', [
+//                'msisdn' => session()->get('_user')['msisdn'],
+//                'packages' => $response
+//            ]);
+//        }
 
         $data = compact(
             'pages',
@@ -66,12 +65,12 @@ class HomeController extends Controller
             session()->put('_user', ['msisdn' => $result->result[0]->mobile]);
 //          add package to session
 
-            $response = $this->getPackageSubs(session()->get('_user')['msisdn']);
-
-            session()->put('_user', [
-                'msisdn' => session()->get('_user')['msisdn'],
-                'packages' => $response
-            ]);
+//            $response = $this->getPackageSubs(session()->get('_user')['msisdn']);
+//
+//            session()->put('_user', [
+//                'msisdn' => session()->get('_user')['msisdn'],
+//                'packages' => $response
+//            ]);
 
 //          add log login to vlearn
 
@@ -140,12 +139,12 @@ class HomeController extends Controller
             session()->put('_user', ['msisdn' => '84'. substr($data['phone'], -9)]);
         }
 
-        $response = $this->getPackageSubs(session()->get('_user')['msisdn']);
-
-        session()->put('_user', [
-            'msisdn' => session()->get('_user')['msisdn'],
-            'packages' => $response
-        ]);
+//        $response = $this->getPackageSubs(session()->get('_user')['msisdn']);
+//
+//        session()->put('_user', [
+//            'msisdn' => session()->get('_user')['msisdn'],
+//            'packages' => $response
+//        ]);
 
 
         return Redirect::route('home.index');

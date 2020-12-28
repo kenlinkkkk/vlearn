@@ -87,21 +87,21 @@
                             <td class="hidden-content">{{ $item->price }}</td>
                             <td class="hidden-content">{{ $item->duration }}</td>
                             <td>{!! $item->description !!}</td>
-                            @if(session()->get('_user.packages') != 'empty')
-                                @if (!is_numeric(array_search($item->package_code, session()->get('_user')['packages'])))
-                                    <td>
-                                        <form action="{{ route('home.reg') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="package" value="{{ $item->package_code }}">
-                                            <button type="submit" class="btn btn-sm btn-primary">Đăng ký ngay</button>
-                                        </form>
-                                    </td>
-                                @else
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-danger disabled">Đã đăng ký</button>
-                                    </td>
-                                @endif
-                            @endif
+{{--                            @if(session()->get('_user.packages') != 'empty')--}}
+{{--                                @if (!is_numeric(array_search($item->package_code, session()->get('_user')['packages'])))--}}
+{{--                                    <td>--}}
+{{--                                        <form action="{{ route('home.reg') }}" method="POST">--}}
+{{--                                            @csrf--}}
+{{--                                            <input type="hidden" name="package" value="{{ $item->package_code }}">--}}
+{{--                                            <button type="submit" class="btn btn-sm btn-primary">Đăng ký ngay</button>--}}
+{{--                                        </form>--}}
+{{--                                    </td>--}}
+{{--                                @else--}}
+{{--                                    <td>--}}
+{{--                                        <button type="button" class="btn btn-sm btn-danger disabled">Đã đăng ký</button>--}}
+{{--                                    </td>--}}
+{{--                                @endif--}}
+{{--                            @endif--}}
 
                         </tr>
                     @endforeach

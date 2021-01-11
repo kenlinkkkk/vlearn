@@ -37,7 +37,7 @@ class LessonController extends Controller
 
     public function edit($lesson_id)
     {
-        $item = Lesson::query()->where('slug', '=', $lesson_id)->where('status', '=', 1)->first();
+        $item = Lesson::query()->whereKey($lesson_id)->first();
 
         $data = compact('item');
         return view('admin.lesson.edit', $data);
@@ -87,8 +87,45 @@ class LessonController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $lesson_id)
     {
+        $data = $request->except('_token');
 
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $input['image_thumbnail'] = 'thumbnail64_'. $file->getClientOriginalName();
+            $filePath = 'uploads/lessons';
+            $filePath = str_replace('\\', '/', $filePath);
+            $img1 = Image::make($file->path());
+            $img1->fit(self::IMAGE_THUMBNAIL['w'], self::IMAGE_THUMBNAIL['h'], function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($filePath .'/'.$input['image_thumbnail'], 72);
+
+            $picture_name = $file->getClientOriginalName();
+            $file->move($filePath, $picture_name);
+            $data['image'] = $picture_name;
+        }
+
+        if ($request->hasFile('video')) {
+            $file = $request->file('video');
+            $filePath = 'uploads/lessons';
+            $filePath = str_replace('\\', '/', $filePath);
+            $video_name = $file->getClientOriginalName();
+            $file->move($filePath, $video_name);
+            $data['video'] = $video_name;
+        }
+
+        try {
+            $result = $this->lessonEloquentRepository->update($lesson_id, $data);
+            if ($result) {
+                session()->flash('success', 'Cập nhật thành công');
+            } else {
+                session()->flash('error', 'Cập nhật thất bại');
+            }
+            return Redirect::route('admin.lesson.index');
+        } catch (\Exception $exception) {
+            return report($exception);
+        }
     }
 }

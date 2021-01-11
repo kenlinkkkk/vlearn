@@ -21,4 +21,9 @@ class Package extends Model
     {
         return $this->belongsTo(Package::class, 'fa_package');
     }
+
+    public function withLessons()
+    {
+        return $this->hasMany(Package::class, 'package_id');
+    }
 }

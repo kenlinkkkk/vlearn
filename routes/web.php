@@ -40,6 +40,15 @@ Route::middleware('auth')->group(function () {
             Route::post('/create', 'Admin\PackageController@create')->name('create');
             Route::post('/update/{package_id}', 'Admin\PackageController@update')->name('update');
         });
+
+        Route::prefix('/lesson')->name('lesson.')->group(function () {
+            Route::get('/', 'Admin\LessonController@index')->name('index');
+            Route::get('/add', 'Admin\LessonController@add')->name('add');
+            Route::get('/edit/{lesson_id}', 'Admin\LessonController@edit')->name('edit');
+
+            Route::post('/create', 'Admin\LessonController@create')->name('create');
+            Route::post('/update/{lesson_id}', 'Admin\LessonController@update')->name('update');
+        });
     });
 });
 

@@ -22,6 +22,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('admin.package.index') }}">Quản lý gói</a></li>
                         <li><a href="{{ route('admin.page.index') }}">Quản lý trang</a></li>
+                        <li><a href="{{ route('admin.lesson.index') }}">Quản lý bài học</a></li>
                     </ul>
                 </li>
 

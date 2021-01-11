@@ -4,13 +4,13 @@ function url_slug($str, $options = array())
 {
     // Make sure string is in UTF-8 and strip invalid UTF-8 characters
     $str = mb_convert_encoding((string)$str, 'UTF-8', mb_list_encodings());
-
     $defaults = array(
         'delimiter' => '-',
         'limit' => null,
         'lowercase' => true,
         'replacements' => array(),
         'transliterate' => true,
+        'timestamps' => false
     );
 
     // Merge options
@@ -18,7 +18,7 @@ function url_slug($str, $options = array())
 
     // Lowercase
     if ($options['lowercase']) {
-        $str = mb_strtolower($str, 'UTF-8');
+        $str = mb_strtolower((string)$str, 'UTF-8');
     }
 
     $char_map = array(
@@ -44,6 +44,7 @@ function url_slug($str, $options = array())
     // Replace non-alphanumeric characters with our delimiter
 //    $str = preg_replace('/[^p{L}p{Nd}]+/u', $options['delimiter'], $str);
     $str = preg_replace('/[[:space:]]+/', '-', $str);
+    $str = preg_replace('/[^A-Za-z0-9\-]/', '', $str);
     // Remove duplicate delimiters
     $str = preg_replace('/(' . preg_quote($options['delimiter'], '/') . '){2,}/', '$1', $str);
 
@@ -52,9 +53,13 @@ function url_slug($str, $options = array())
 
     // Remove delimiter from ends
     $str = trim($str, $options['delimiter']);
+    if ($options['timestamps'] == true) {
+        return $str . '-'. round(microtime(true) * 1000);
+    }
+    return $str;
 
-    return $str . '-'. round(microtime(true) * 1000);
 }
+
 
 /**
  * @param $key

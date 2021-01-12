@@ -24,6 +24,6 @@ class Package extends Model
 
     public function withLessons()
     {
-        return $this->hasMany(Package::class, 'package_id');
+        return $this->hasMany(Lesson::class, 'package_id');
     }
 }

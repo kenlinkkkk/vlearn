@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use App\Models\Page;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -54,7 +55,21 @@ class ClientController extends Controller
         $pages = Page::where('status', '=', 1)->get();
 
         $pkg = session()->get('_user')['packages'];
-        $data = compact('pages');
+
+        $packages = Package::query()->where('status', '=', 1)
+            ->whereIn('package_code', $pkg)
+            ->get();
+        $pkg_ids = [];
+        foreach ($packages as $package) {
+            $pkg_ids[] = $package->id;
+        }
+
+        $subPackages = Package::query()->where('status', '=', 1)
+            ->whereNotNull('fa_package')
+            ->whereIn('fa_package', $pkg_ids)
+            ->with('withLessons')
+            ->paginate(10);
+        $data = compact('pages', 'subPackages');
         return view('client.courses', $data);
     }
 

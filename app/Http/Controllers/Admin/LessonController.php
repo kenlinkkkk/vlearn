@@ -50,11 +50,11 @@ class LessonController extends Controller
     {
         $data = $request->except('_token');
         if (empty($data['slug'])) {
-            $data['slug'] = url_slug($data['name'], ['timestamps' => true]);
+            $data['slug'] = url_slug($data['name'], ['timestamps' => true, 'limit' => 100]);
         }
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $input['image_thumbnail'] = 'thumbnail64_'. url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
+            $input['image_thumbnail'] = 'thumbnail64_'. url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_', 'limit' => 100]) .'.'. $file->getClientOriginalExtension();
             $filePath = 'uploads/lessons';
             $filePath = str_replace('\\', '/', $filePath);
             $img1 = Image::make($file->path());
@@ -63,7 +63,7 @@ class LessonController extends Controller
                 $constraint->upsize();
             })->save($filePath .'/'.$input['image_thumbnail'], 72);
 
-            $picture_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
+            $picture_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_', 'limit' => 100]) .'.'. $file->getClientOriginalExtension();
             $file->move($filePath, $picture_name);
             $data['image'] = $picture_name;
         }
@@ -72,7 +72,7 @@ class LessonController extends Controller
             $file = $request->file('video');
             $filePath = 'uploads/lessons';
             $filePath = str_replace('\\', '/', $filePath);
-            $video_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
+            $video_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_', 'limit' => 100]) .'.'. $file->getClientOriginalExtension();
             $file->move($filePath, $video_name);
             $data['video'] = $video_name;
         }
@@ -96,7 +96,7 @@ class LessonController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $input['image_thumbnail'] = 'thumbnail64_'. url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
+            $input['image_thumbnail'] = 'thumbnail64_'. url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_', 'limit' => 100]) .'.'. $file->getClientOriginalExtension();
             $filePath = 'uploads/lessons';
             $filePath = str_replace('\\', '/', $filePath);
             $img1 = Image::make($file->path());
@@ -105,7 +105,7 @@ class LessonController extends Controller
                 $constraint->upsize();
             })->save($filePath .'/'.$input['image_thumbnail'], 72);
 
-            $picture_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
+            $picture_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_', 'limit' => 100]) .'.'. $file->getClientOriginalExtension();
             $file->move($filePath, $picture_name);
             $data['image'] = $picture_name;
         }
@@ -114,7 +114,7 @@ class LessonController extends Controller
             $file = $request->file('video');
             $filePath = 'uploads/lessons';
             $filePath = str_replace('\\', '/', $filePath);
-            $video_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
+            $video_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_', 'limit' => 100]) .'.'. $file->getClientOriginalExtension();
             $file->move($filePath, $video_name);
             $data['video'] = $video_name;
         }

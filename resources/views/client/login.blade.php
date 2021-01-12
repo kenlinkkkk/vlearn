@@ -35,7 +35,7 @@
             <div class="col-md-4 col-sm-12"></div>
             <div class="col-md-4 col-sm-12 card">
                 <div class="card-body">
-                    <form method="GET" action="https://home365.vn/web/autologin.jsp">
+                    <form method="POST" action="{{ route('home.postLogin') }}">
                         @csrf
                         <div class="form-group">
                             <label for="msisdn">Số điện thoại</label>

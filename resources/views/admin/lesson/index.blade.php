@@ -39,6 +39,30 @@
                             <th class="text-right">Trạng thái</th>
                             <th class="text-right">Action</th>
                         </tr>
+                        @foreach($lessons as $item)
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->withPackage->name }}</td>
+                                @if($item->status == 1)
+                                    <td><span class="badge badge-pill badge-success float-right">Active</span></td>
+                                @else
+                                    <td><span class="badge badge-pill badge-danger float-right">Inactive</span></td>
+                                @endif
+                                <td class="text-right">
+                                    <form id="form-{{ $item->id }}" method="post" action="{{ route('admin.lesson.update', [$item->id]) }}">
+                                        @csrf
+                                        <input type="hidden" name="status" value="{{ $item->status == 1 ? 0 : 1 }}">
+                                        <a href="{{ route('admin.lesson.edit', [$item->id]) }}" class="btn btn-success btn-sm">Sửa</a>
+                                        @if($item->status == 1)
+                                            <button type="submit" itemId="{{ $item->id }}" class="btn btn-danger btn-sm btn-delete">Deactive</button>
+                                        @else
+                                            <button type="submit" itemId="{{ $item->id }}" class="btn btn-success btn-sm btn-delete">Active</button>
+                                        @endif
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                         </thead>
                         <tbody>
                         </tbody>

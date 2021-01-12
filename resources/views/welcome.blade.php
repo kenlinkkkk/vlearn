@@ -17,7 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-sm-6">
-                    <img src="{{ asset('assets/client/img/images/logo.png') }}" class="img-fluid">
+                    <img src="{{ asset('assets/client/main-logo.png') }}" class="img-fluid">
                 </div>
                 <div class="col-md-9 col-sm-6">
                     <div class="m-5 text-justify">

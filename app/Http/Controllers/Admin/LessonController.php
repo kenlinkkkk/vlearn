@@ -20,7 +20,7 @@ class LessonController extends Controller
 
     public function index()
     {
-        $lessons = Lesson::query()->where('status', '=', 1)->get();
+        $lessons = Lesson::query()->where('status', '=', 1)->with('withPackage')->get();
         $data = compact('lessons');
         return view('admin.lesson.index', $data);
     }
@@ -38,8 +38,11 @@ class LessonController extends Controller
     public function edit($lesson_id)
     {
         $item = Lesson::query()->whereKey($lesson_id)->first();
-
-        $data = compact('item');
+        $courses = Package::query()
+            ->where('fa_package', '<>', 0)
+            ->where('status', '=', 1)
+            ->get();
+        $data = compact('item', 'courses');
         return view('admin.lesson.edit', $data);
     }
 
@@ -47,11 +50,11 @@ class LessonController extends Controller
     {
         $data = $request->except('_token');
         if (empty($data['slug'])) {
-            $data['slug'] = url_slug($data['title'], ['timestamps' => true]);
+            $data['slug'] = url_slug($data['name'], ['timestamps' => true]);
         }
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $input['image_thumbnail'] = 'thumbnail64_'. $file->getClientOriginalName();
+            $input['image_thumbnail'] = 'thumbnail64_'. url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
             $filePath = 'uploads/lessons';
             $filePath = str_replace('\\', '/', $filePath);
             $img1 = Image::make($file->path());
@@ -60,7 +63,7 @@ class LessonController extends Controller
                 $constraint->upsize();
             })->save($filePath .'/'.$input['image_thumbnail'], 72);
 
-            $picture_name = $file->getClientOriginalName();
+            $picture_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
             $file->move($filePath, $picture_name);
             $data['image'] = $picture_name;
         }
@@ -69,7 +72,7 @@ class LessonController extends Controller
             $file = $request->file('video');
             $filePath = 'uploads/lessons';
             $filePath = str_replace('\\', '/', $filePath);
-            $video_name = $file->getClientOriginalName();
+            $video_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
             $file->move($filePath, $video_name);
             $data['video'] = $video_name;
         }
@@ -93,7 +96,7 @@ class LessonController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $input['image_thumbnail'] = 'thumbnail64_'. $file->getClientOriginalName();
+            $input['image_thumbnail'] = 'thumbnail64_'. url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
             $filePath = 'uploads/lessons';
             $filePath = str_replace('\\', '/', $filePath);
             $img1 = Image::make($file->path());
@@ -102,7 +105,7 @@ class LessonController extends Controller
                 $constraint->upsize();
             })->save($filePath .'/'.$input['image_thumbnail'], 72);
 
-            $picture_name = $file->getClientOriginalName();
+            $picture_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
             $file->move($filePath, $picture_name);
             $data['image'] = $picture_name;
         }
@@ -111,7 +114,7 @@ class LessonController extends Controller
             $file = $request->file('video');
             $filePath = 'uploads/lessons';
             $filePath = str_replace('\\', '/', $filePath);
-            $video_name = $file->getClientOriginalName();
+            $video_name = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_']) .'.'. $file->getClientOriginalExtension();
             $file->move($filePath, $video_name);
             $data['video'] = $video_name;
         }

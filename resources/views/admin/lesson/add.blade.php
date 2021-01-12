@@ -43,7 +43,7 @@
                             <div class="col-sm-12 col-md-3">
                                 <label>Khóa học <span class="text-danger">(*)</span></label>
                                 <div class="custom-file">
-                                    <select class="custom-select" name="fa_package">
+                                    <select class="custom-select" name="package_id">
                                         @foreach($courses as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach

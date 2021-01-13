@@ -60,6 +60,7 @@ Route::get('/backurl', 'Home\HomeController@backUrl')->name('back-url');
         Route::get('/dang-nhap', 'Home\HomeController@showLogin')->name('showLogin');
         Route::prefix('/khoa-hoc')->name('course.')->group(function () {
             Route::get('/', 'Home\ClientController@viewListCourse')->name('listCourse');
+            Route::get('/{slug}', 'Home\ClientController@viewLesson')->name('lessonDetail');
         });
         Route::get('/{page_slug}', 'Home\HomeController@showPage')->name('show-page');
 

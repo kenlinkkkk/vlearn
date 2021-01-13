@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lesson;
 use App\Models\Package;
 use App\Models\Page;
 use GuzzleHttp\Client;
@@ -65,16 +66,22 @@ class ClientController extends Controller
         }
 
         $subPackages = Package::query()->where('status', '=', 1)
-            ->whereNotNull('fa_package')
             ->whereIn('fa_package', $pkg_ids)
-            ->with('withLessons')
+            ->with(['withLessons', 'package'])
             ->paginate(10);
         $data = compact('pages', 'subPackages');
         return view('client.courses', $data);
     }
 
-    public function viewLesson()
+    public function viewLesson(Request $request, $slug)
     {
+        $params = $request->get('c');
 
+        $course = Package::query()->where('slug', '=', $slug)->first();
+        $lessons = Lesson::query()->where('package_id', '=', $course->id)
+            ->where('status', '=', 1)
+            ->paginate(12);
+        $data = compact('course', 'lessons');
+        return view('client.listLessons', $data);
     }
 }

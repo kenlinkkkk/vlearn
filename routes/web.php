@@ -58,15 +58,22 @@ Route::get('/backurl', 'Home\HomeController@backUrl')->name('back-url');
     Route::prefix('/')->name('home.')->group(function () {
         Route::get('/', 'Home\HomeController@index')->name('index');
         Route::get('/dang-nhap', 'Home\HomeController@showLogin')->name('showLogin');
-        Route::prefix('/khoa-hoc')->name('course.')->group(function () {
-            Route::get('/', 'Home\ClientController@viewListCourses')->name('listCourse');
-            Route::prefix('/bai-hoc')->name('lessons.')->group(function () {
+
+        Route::middleware('check.client')->group(function () {
+            Route::get('/thong-tin-ca-nhan', 'Home\ClientController@viewProfile')->name('showProfile');
+            Route::prefix('/khoa-hoc')->name('course.')->group(function () {
+                Route::get('/', 'Home\ClientController@viewListCourses')->name('listCourse');
                 Route::get('/{slug}', 'Home\ClientController@viewListLessons')->name('listLessons');
+                Route::prefix('/bai-hoc')->name('lessons.')->group(function () {
+                    Route::get('/{slug}', 'Home\ClientController@detailLesson')->name('detailLesson');
+                });
             });
         });
+
         Route::get('/{page_slug}', 'Home\HomeController@showPage')->name('show-page');
 
         Route::post('/reg', 'Home\HomeController@regSubmit')->name('reg');
         Route::post('/post-login', 'Home\ClientController@localLogin')->name('postLogin');
+        Route::post('/post-logout', 'Home\ClientController@clientLogout')->name('postLogout');
     });
 //});

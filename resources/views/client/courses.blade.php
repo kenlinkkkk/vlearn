@@ -19,7 +19,7 @@
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->withLessons->count() }} bài mới</td>
-                    <td class="text-center"><a href="{{ route('home.course.lessons.listLessons', ['slug' => $item->slug, 'p' => strtolower($item->package->package_code)]) }}" class="btn btn-sm btn-outline-success">Vào học</a></td>
+                    <td class="text-center"><a href="{{ route('home.course.listLessons', ['slug' => $item->slug, 'p' => strtolower($item->package->package_code)]) }}" class="btn btn-sm btn-outline-success">Vào học</a></td>
                 </tr>
             @endforeach
             </thead>

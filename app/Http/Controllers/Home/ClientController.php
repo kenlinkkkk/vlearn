@@ -87,7 +87,12 @@ class ClientController extends Controller
 
     public function detailLesson(Request $request, $slug)
     {
+        $lesson = Lesson::query()->where('slug', '=', $slug)->first();
+        $lessonsSameCourse = Lesson::query()->where('package_id', '=', $lesson->package_id)->get();
 
+        $data = compact('lesson', 'lessonsSameCourse');
+
+        return view('client.detailLesson', $data);
     }
 
     public function viewProfile()
@@ -100,5 +105,13 @@ class ClientController extends Controller
 
         $data = compact('packages');
         return view('client.profile', $data);
+    }
+
+    public function clientLogout(Request $request)
+    {
+        $request->session()->forget('_user');
+        $request->session()->flush();
+
+        return Redirect::route('home.index');
     }
 }

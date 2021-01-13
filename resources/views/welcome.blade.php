@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div id="customButton" class="d-flex align-content-center">
-                <a href="https://vlearn.edu.vn/auth/login">
+                <a href="{{ route('home.course.listCourse') }}">
                     <svg class="icon-arrow before">
                         <use xlink:href="#arrow"></use>
                     </svg>

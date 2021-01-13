@@ -1,22 +1,34 @@
 @extends('layouts.app')
 
 @section('title')
-    <title>{{ $course->name }}</title>
+    <title>{{ $lesson->name }}</title>
 @endsection
 
 @section('content')
     <div class="container mt-8 mb-8">
         <div class="row mt-4 mb-4">
-            <h2>{{ $course->name }}</h2>
+            <h2>{{ $lesson->name }}</h2>
         </div>
-        <div class="row mt-4 mb-4">
-            @foreach($lessons as $item)
-                <div class="col-sm-6 col-md-3">
-                    <img src="{{ asset('uploads/lessons/thumbnail64_'.$item->image) }}" style="border-radius: 0.5rem" class="img-fluid" alt="{{ $item->name }}">
-                    <a href="{{ route('home.course.lessonDetail', ['slug' => $item->slug]) }}">{{ $item->name }}</a>
+        <div class="row mt-4 mb-4 d-flex justify-content-center">
+            <div class="col-sm-12 col-md-8">
+                <video width="100%" controls>
+                    <source src="{{ $lesson->video }}" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="row mt-4 mb-4 text-right">
+            <h4>Các video cùng bài học</h4>
+
+            <div class="col-sm-12 col-md-12 mt-4 mb-5">
+                <div class="row">
+                    @foreach($lessonsSameCourse as $item)
+                        <div class="col-sm-6 col-md-3 mt-5">
+                            <img src="{{ $item->image }}" class="img-fluid" style="border-radius: 0.5rem" alt="{{ $item->name }}">
+                            <a href="{{ route('home.course.lessons.detailLesson', ['slug' => $item->slug]) }}" title="{{ $item->name }}" class="text-ellipsis-2">{{ $item->name }}</a>
+                        </div>
+                    @endforeach
                 </div>
-            @endforeach
+            </div>
         </div>
-        {{ $lessons->links() }}
     </div>
 @endsection

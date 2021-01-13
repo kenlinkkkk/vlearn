@@ -12,7 +12,20 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     @if(session()->exists('_user.msisdn') && session()->get('_user')['msisdn'] != 'empty')
-                        <li class="nav-item"><a href="#" class="nav-link">Xin chào: {{ '*****'. substr(session()->get('_user')['msisdn'], -3) }}</a></li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Xin chào: {{ '*****'. substr(session()->get('_user')['msisdn'], -3) }}
+                            </a>
+                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                <a href="{{ route('home.showProfile') }}" class="dropdown-item m-2 text-white">Thông tin cá nhân</a>
+                                <div class="dropdown-divider"></div>
+                                <form action="{{ route('home.postLogout') }}" method="post">
+                                    @csrf
+                                    <button class="dropdown-item m-2 text-danger" type="submit"> Đăng xuất</button>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a href="{{ route('home.course.listCourse') }}">Khóa học của bạn</a></li>
                     @endif
                     <li class="nav-item"><a href="{{ route('home.index') }}" class="nav-link">Trang chủ</a></li>
                     <li class="nav-item"><a href="#intro" class="nav-link">Giới thiệu</a></li>

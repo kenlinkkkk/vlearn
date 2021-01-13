@@ -62,7 +62,7 @@ Route::get('/backurl', 'Home\HomeController@backUrl')->name('back-url');
             Route::get('/', 'Home\ClientController@viewListCourse')->name('listCourse');
             Route::get('/{slug}', 'Home\ClientController@viewLesson')->name('lessonDetail');
         });
-        Route::get('/{page_slug}', 'Home\HomeController@showPage')->name('show-page');
+//        Route::get('/{page_slug}', 'Home\HomeController@showPage')->name('show-page');
 
         Route::post('/reg', 'Home\HomeController@regSubmit')->name('reg');
         Route::post('/post-login', 'Home\ClientController@localLogin')->name('postLogin');

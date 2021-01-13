@@ -12,7 +12,7 @@
         <div class="row">
             @foreach($lessons as $item)
                 <div class="col-sm-6 col-md-3">
-                    <img src="{{ asset('uploads/lessons/thumbnail64_'.$item->picture) }}" class="img-fluid" alt="{{ $item->name }}">
+                    <img src="{{ asset('uploads/lessons/thumbnail64_'.$item->image) }}" class="img-fluid" alt="{{ $item->name }}">
                 </div>
             @endforeach
         </div>

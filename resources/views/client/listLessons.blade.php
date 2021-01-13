@@ -5,14 +5,15 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row mt-4">
+    <div class="container mt-8 mb-8">
+        <div class="row mt-4 mb-4">
             <h2>{{ $course->name }}</h2>
         </div>
-        <div class="row">
+        <div class="row mt-4 mb-4">
             @foreach($lessons as $item)
                 <div class="col-sm-6 col-md-3">
-                    <img src="{{ asset('uploads/lessons/thumbnail64_'.$item->image) }}" class="img-fluid" alt="{{ $item->name }}">
+                    <img src="{{ asset('uploads/lessons/thumbnail64_'.$item->image) }}" style="border-radius: 0.5rem" class="img-fluid" alt="{{ $item->name }}">
+                    <p>{{ $item->name }}</p>
                 </div>
             @endforeach
         </div>

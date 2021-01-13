@@ -96,6 +96,7 @@ class LessonController extends Controller
         $data = $request->except('_token');
 
         if ($request->hasFile('image')) {
+
             $file = $request->file('image');
             $uniqueName = url_slug($file->getClientOriginalName(), ['timestamps' => true, 'delimiter' => '_', 'limit' => 100]) .'.'. $file->getClientOriginalExtension();
             $input['image_thumbnail'] = 'thumbnail64_'. $uniqueName;

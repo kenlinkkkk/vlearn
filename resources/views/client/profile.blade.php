@@ -7,16 +7,29 @@
 @section('content')
     <div class="container mt-8 mb-8">
         <div class="row mt-4 mb-4">
-            <h2>{{ $course->name }}</h2>
+            <h2>Thông tin thuê bao</h2>
         </div>
-        <div class="row mt-4 mb-4">
-            @foreach($lessons as $item)
-                <div class="col-sm-6 col-md-3">
-                    <img src="{{ asset('uploads/lessons/thumbnail64_'.$item->image) }}" style="border-radius: 0.5rem" class="img-fluid" alt="{{ $item->name }}">
-                    <a href="{{ route('home.course.lessonDetail', ['slug' => $item->slug]) }}">{{ $item->name }}</a>
-                </div>
-            @endforeach
+        <div class="row mt-4 mb-4 table-responsive">
+            <h4>Danh sách các gói đang sử dụng</h4>
+            <p>Thuê bao: {{ '0'. substr(session()->get('_user')['msisdn'], -9) }}</p>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên gói</th>
+                    <th class="text-right">Giá cước</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($packages as $key => $item)
+                    <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $key->price }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         </div>
-        {{ $lessons->links() }}
     </div>
 @endsection

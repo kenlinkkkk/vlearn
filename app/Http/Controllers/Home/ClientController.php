@@ -92,6 +92,13 @@ class ClientController extends Controller
 
     public function viewProfile()
     {
+        $pkg = session()->get('_user')['packages'];
 
+        $packages = Package::query()->whereIn('package_code', $pkg)
+            ->where('status', '=', 1)
+            ->get();
+
+        $data = compact('packages');
+        return view('client.profile', $data);
     }
 }

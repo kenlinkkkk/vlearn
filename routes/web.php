@@ -59,8 +59,10 @@ Route::get('/backurl', 'Home\HomeController@backUrl')->name('back-url');
         Route::get('/', 'Home\HomeController@index')->name('index');
         Route::get('/dang-nhap', 'Home\HomeController@showLogin')->name('showLogin');
         Route::prefix('/khoa-hoc')->name('course.')->group(function () {
-            Route::get('/', 'Home\ClientController@viewListCourse')->name('listCourse');
-            Route::get('/{slug}', 'Home\ClientController@viewLesson')->name('lessonDetail');
+            Route::get('/', 'Home\ClientController@viewListCourses')->name('listCourse');
+            Route::prefix('/bai-hoc')->name('lessons.')->group(function () {
+                Route::get('/{slug}', 'Home\ClientController@viewListLessons')->name('listLessons');
+            });
         });
         Route::get('/{page_slug}', 'Home\HomeController@showPage')->name('show-page');
 

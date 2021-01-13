@@ -51,7 +51,7 @@ class ClientController extends Controller
         return Redirect::route('home.course.listCourse');
     }
 
-    public function viewListCourse()
+    public function viewListCourses()
     {
         $pages = Page::where('status', '=', 1)->get();
 
@@ -73,7 +73,7 @@ class ClientController extends Controller
         return view('client.courses', $data);
     }
 
-    public function viewLesson(Request $request, $slug)
+    public function viewListLessons(Request $request, $slug)
     {
         $params = $request->get('c');
 
@@ -83,5 +83,15 @@ class ClientController extends Controller
             ->paginate(12);
         $data = compact('course', 'lessons');
         return view('client.listLessons', $data);
+    }
+
+    public function detailLesson(Request $request, $slug)
+    {
+
+    }
+
+    public function viewProfile()
+    {
+
     }
 }

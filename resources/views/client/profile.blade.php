@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    <title>{{ $course->name }}</title>
+    <title>Thông tin cá nhân</title>
 @endsection
 
 @section('content')
@@ -13,12 +13,10 @@
             @foreach($lessons as $item)
                 <div class="col-sm-6 col-md-3">
                     <img src="{{ asset('uploads/lessons/thumbnail64_'.$item->image) }}" style="border-radius: 0.5rem" class="img-fluid" alt="{{ $item->name }}">
-                    <a href="{{ route('home.course.lessons.listLessons', ['slug' => $item->slug]) }}" title="{{ $item->name }}" class="text-ellipsis-2">{{ $item->name }}</a>
+                    <a href="{{ route('home.course.lessonDetail', ['slug' => $item->slug]) }}">{{ $item->name }}</a>
                 </div>
             @endforeach
         </div>
-        <div class="row mt-4 mb-4 text-right">
-            {{ $lessons->links() }}
-        </div>
+        {{ $lessons->links() }}
     </div>
 @endsection

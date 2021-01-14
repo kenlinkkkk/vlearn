@@ -25,7 +25,7 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $item->name }}</td>
-                        <td>{{ $key->price }}</td>
+                        <td>{{ $item->price }}</td>
                     </tr>
                 @endforeach
                 </tbody>

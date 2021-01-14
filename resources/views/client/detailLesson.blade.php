@@ -16,7 +16,7 @@
                 </video>
             </div>
         </div>
-        <div class="row mt-4 mb-4 text-right">
+        <div class="row mt-4 mb-4">
             <h4>Các video cùng bài học</h4>
 
             <div class="col-sm-12 col-md-12 mt-4 mb-5">

@@ -12,7 +12,7 @@ use Intervention\Image\Facades\Image;
 
 class LessonController extends Controller
 {
-    const IMAGE_THUMBNAIL = ['w' => 320, 'h' => 180];
+    const IMAGE_THUMBNAIL = ['w' => 480, 'h' => 270];
     public function __construct(LessonEloquentRepository $lessonEloquentRepository)
     {
         $this->lessonEloquentRepository = $lessonEloquentRepository;

@@ -56,10 +56,14 @@ class ClientController extends Controller
         $pages = Page::where('status', '=', 1)->get();
 
         $pkg = session()->get('_user')['packages'];
-
-        $packages = Package::query()->where('status', '=', 1)
-            ->whereIn('package_code', $pkg)
-            ->get();
+        if (in_array('MT', $pkg)) {
+            $packages = Package::query()->where('status', '=', 1)
+                ->get();
+        } else {
+            $packages = Package::query()->where('status', '=', 1)
+                ->whereIn('package_code', $pkg)
+                ->get();
+        }
         $pkg_ids = [];
         foreach ($packages as $package) {
             $pkg_ids[] = $package->id;
@@ -113,5 +117,10 @@ class ClientController extends Controller
         $request->session()->flush();
 
         return Redirect::route('home.index');
+    }
+
+    public function createLogView(Request $request)
+    {
+
     }
 }

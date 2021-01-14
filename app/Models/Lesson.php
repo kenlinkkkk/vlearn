@@ -16,4 +16,9 @@ class Lesson extends Model
     {
         return $this->belongsTo(Package::class, 'package_id');
     }
+
+    public function withLogs()
+    {
+        return $this->hasMany(ActionLog::class, 'lesson_id');
+    }
 }

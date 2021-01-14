@@ -11,7 +11,7 @@
         </div>
         <div class="row mt-4 mb-4">
             @foreach($lessons as $item)
-                <div class="col-sm-6 col-md-3 mt-6">
+                <div class="col-sm-6 col-md-4 mb-6 mt-6">
                     <a href="{{ route('home.course.lessons.detailLesson', ['slug' => $item->slug]) }}" title="{{ $item->name }}">
                         <img src="{{ asset('media/thumbnail64_'.$item->image) }}" style="border-radius: 0.5rem" class="img-fluid" alt="{{ $item->name }}">
                     </a>

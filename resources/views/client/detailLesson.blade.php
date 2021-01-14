@@ -12,7 +12,7 @@
         <div class="row mt-4 mb-4 d-flex justify-content-center">
             <div class="col-sm-12 col-md-8">
                 <video width="100%" controls>
-                    <source src="{{ $lesson->video }}" type="video/mp4">
+                    <source src="{{ asset('media/'. $lesson->video) }}" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -23,7 +23,7 @@
                 <div class="row">
                     @foreach($lessonsSameCourse as $item)
                         <div class="col-sm-6 col-md-3 mt-5">
-                            <img src="{{ $item->image }}" class="img-fluid" style="border-radius: 0.5rem" alt="{{ $item->name }}">
+                            <img src="{{ asset('media/'. $item->image) }}" class="img-fluid" style="border-radius: 0.5rem" alt="{{ $item->name }}">
                             <a href="{{ route('home.course.lessons.detailLesson', ['slug' => $item->slug]) }}" title="{{ $item->name }}" class="text-ellipsis-2">{{ $item->name }}</a>
                         </div>
                     @endforeach

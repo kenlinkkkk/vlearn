@@ -25,7 +25,7 @@
                                 </form>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="{{ route('home.course.listCourse') }}">Khóa học của bạn</a></li>
+                        <li class="nav-item"><a href="{{ route('home.course.listCourse') }}" class="nav-link">Khóa học của bạn</a></li>
                     @endif
                     <li class="nav-item"><a href="{{ route('home.index') }}" class="nav-link">Trang chủ</a></li>
                     <li class="nav-item"><a href="#intro" class="nav-link">Giới thiệu</a></li>

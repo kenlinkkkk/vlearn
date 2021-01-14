@@ -11,7 +11,7 @@
         </div>
         <div class="row mt-4 mb-4 table-responsive">
             <h4>Danh sách các gói đang sử dụng</h4>
-            <p>Thuê bao: {{ '0****8'. substr(session()->get('_user')['msisdn'], -4) }}</p>
+            <p>Thuê bao: {{ '0*****'. substr(session()->get('_user')['msisdn'], 7) }}</p>
             <table class="table table-bordered">
                 <thead>
                 <tr>

@@ -92,3 +92,6 @@ function aesDecrypt($key, $data, $config = null) {
     return openssl_decrypt(base64_decode($data), $method, $key, OPENSSL_RAW_DATA);
 }
 
+function replacePrice($str) {
+
+}

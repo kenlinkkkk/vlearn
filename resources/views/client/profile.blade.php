@@ -11,7 +11,7 @@
         </div>
         <div class="row mt-4 mb-4 table-responsive">
             <h4>Danh sách các gói đang sử dụng</h4>
-            <p>Thuê bao: {{ '0'. substr(session()->get('_user')['msisdn'], -9) }}</p>
+            <p>Thuê bao: {{ '0****8'. substr(session()->get('_user')['msisdn'], -4) }}</p>
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -25,7 +25,7 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $item->name }}</td>
-                        <td>{{ $item->price }}</td>
+                        <td class="text-right">{{ number_format($item->price, 0, ",", "."). '₫' }}</td>
                     </tr>
                 @endforeach
                 </tbody>

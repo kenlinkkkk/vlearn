@@ -92,7 +92,9 @@ class ClientController extends Controller
     public function detailLesson(Request $request, $slug)
     {
         $lesson = Lesson::query()->where('slug', '=', $slug)->first();
-        $lessonsSameCourse = Lesson::query()->where('package_id', '=', $lesson->package_id)->get();
+        $lessonsSameCourse = Lesson::query()->where('package_id', '=', $lesson->package_id)
+            ->where('status', '=', 1)
+            ->get();
 
         $data = compact('lesson', 'lessonsSameCourse');
 

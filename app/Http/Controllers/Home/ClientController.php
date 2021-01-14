@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActionLog;
 use App\Models\Lesson;
 use App\Models\Package;
 use App\Models\Page;
@@ -94,8 +95,25 @@ class ClientController extends Controller
         $lesson = Lesson::query()->where('slug', '=', $slug)->first();
         $lessonsSameCourse = Lesson::query()->where('package_id', '=', $lesson->package_id)
             ->where('status', '=', 1)
-            ->get();
+            ->get()->toArray();
 
+        usort($lessonsSameCourse, function ($a, $b) {
+            $a1 = preg_split('/-/i', $a['name']);
+            $b1 = preg_split('/-/i', $b['name']);
+            $aNumber = preg_replace('/[^0-9]/', '', url_slug($a1[0]));
+            $bNumber = preg_replace('/[^0-9]/', '', url_slug($b1[0]));
+            return $aNumber < $bNumber ? -1 : 1;
+        });
+        ActionLog::query()->create([
+            'msisdn' => session()->get('_user')['msisdn'],
+            'action' => 'VIEW_LESSON',
+            'lesson_id' => $lesson->id,
+            'note' => 'Xem bài học'
+        ]);
+        Lesson::query()->whereKey($lesson->id)
+            ->update([
+                'view_count' => $lesson->view_count + 1,
+            ]);
         $data = compact('lesson', 'lessonsSameCourse');
 
         return view('client.detailLesson', $data);

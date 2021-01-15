@@ -98,7 +98,7 @@ class ClientController extends Controller
         $lesson = Lesson::query()->where('slug', '=', $slug)->first();
         $lessonsSameCourse = Lesson::query()->where('package_id', '=', $lesson->package_id)
             ->where('status', '=', 1)
-            ->get()->toArray();
+            ->get();
 
 //        usort($lessonsSameCourse, function ($a, $b) {
 //            $a1 = preg_split('/-/i', $a['name']);

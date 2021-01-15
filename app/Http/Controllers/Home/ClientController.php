@@ -72,7 +72,10 @@ class ClientController extends Controller
 
         $subPackages = Package::query()->where('status', '=', 1)
             ->whereIn('fa_package', $pkg_ids)
-            ->with(['withLessons', 'package'])
+            ->with('withLessons', function ($query) {
+                $query->where('status', '=', 1);
+            })
+            ->with('package')
             ->paginate(10);
         $data = compact('pages', 'subPackages');
         return view('client.courses', $data);

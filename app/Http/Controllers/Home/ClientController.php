@@ -72,7 +72,9 @@ class ClientController extends Controller
 
         $subPackages = Package::query()->where('status', '=', 1)
             ->whereIn('fa_package', $pkg_ids)
-            ->with('withLessons')
+            ->with('withLessons', function ($query) {
+                $query->where('status', '=', 1);
+            })
             ->with('package')
             ->paginate(10);
         $data = compact('pages', 'subPackages');
@@ -98,23 +100,23 @@ class ClientController extends Controller
             ->where('status', '=', 1)
             ->get()->toArray();
 
-        usort($lessonsSameCourse, function ($a, $b) {
-            $a1 = preg_split('/-/i', $a['name']);
-            $b1 = preg_split('/-/i', $b['name']);
-            $aNumber = preg_replace('/[^0-9]/', '', url_slug($a1[0]));
-            $bNumber = preg_replace('/[^0-9]/', '', url_slug($b1[0]));
-            return $aNumber < $bNumber ? -1 : 1;
-        });
-        ActionLog::query()->create([
-            'msisdn' => session()->get('_user')['msisdn'],
-            'action' => 'VIEW_LESSON',
-            'lesson_id' => $lesson->id,
-            'note' => 'Xem bài học'
-        ]);
-        Lesson::query()->whereKey($lesson->id)
-            ->update([
-                'view_count' => $lesson->view_count + 1,
-            ]);
+//        usort($lessonsSameCourse, function ($a, $b) {
+//            $a1 = preg_split('/-/i', $a['name']);
+//            $b1 = preg_split('/-/i', $b['name']);
+//            $aNumber = preg_replace('/[^0-9]/', '', url_slug($a1[0]));
+//            $bNumber = preg_replace('/[^0-9]/', '', url_slug($b1[0]));
+//            return $aNumber < $bNumber ? -1 : 1;
+//        });
+//        ActionLog::query()->create([
+//            'msisdn' => session()->get('_user')['msisdn'],
+//            'action' => 'VIEW_LESSON',
+//            'lesson_id' => $lesson->id,
+//            'note' => 'Xem bài học'
+//        ]);
+//        Lesson::query()->whereKey($lesson->id)
+//            ->update([
+//                'view_count' => $lesson->view_count + 1,
+//            ]);
         $data = compact('lesson', 'lessonsSameCourse');
 
         return view('client.detailLesson', $data);

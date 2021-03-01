@@ -1,0 +1,112 @@
+[01-Mar-2021 10:59:26 UTC] PHP Fatal error:  Declaration of App\Exceptions\Handler::report(Exception $exception) must be compatible with Illuminate\Foundation\Exceptions\Handler::report(Throwable $e) in D:\Winginx\home\dev.vlearn.vn\app\Exceptions\Handler.php on line 8
+[01-Mar-2021 10:59:26 UTC] PHP Stack trace:
+[01-Mar-2021 10:59:26 UTC] PHP   1. {main}() D:\Winginx\home\dev.vlearn.vn\artisan:0
+[01-Mar-2021 10:59:26 UTC] PHP   2. App\Console\Kernel->handle() D:\Winginx\home\dev.vlearn.vn\artisan:37
+[01-Mar-2021 10:59:26 UTC] PHP   3. App\Console\Kernel->bootstrap() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:127
+[01-Mar-2021 10:59:26 UTC] PHP   4. Illuminate\Foundation\Application->bootstrapWith() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:310
+[01-Mar-2021 10:59:26 UTC] PHP   5. Illuminate\Foundation\Bootstrap\RegisterProviders->bootstrap() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:230
+[01-Mar-2021 10:59:26 UTC] PHP   6. Illuminate\Foundation\Application->registerConfiguredProviders() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterProviders.php:17
+[01-Mar-2021 10:59:26 UTC] PHP   7. Illuminate\Foundation\ProviderRepository->load() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:604
+[01-Mar-2021 10:59:26 UTC] PHP   8. Illuminate\Foundation\Application->register() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:75
+[01-Mar-2021 10:59:26 UTC] PHP   9. NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider->register() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:627
+[01-Mar-2021 10:59:26 UTC] PHP  10. Illuminate\Foundation\Application->make() D:\Winginx\home\dev.vlearn.vn\vendor\nunomaduro\collision\src\Adapters\Laravel\CollisionServiceProvider.php:72
+[01-Mar-2021 10:59:26 UTC] PHP  11. Illuminate\Foundation\Application->make() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:781
+[01-Mar-2021 10:59:26 UTC] PHP  12. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:637
+[01-Mar-2021 10:59:26 UTC] PHP  13. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:796
+[01-Mar-2021 10:59:26 UTC] PHP  14. Illuminate\Foundation\Application->build() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:691
+[01-Mar-2021 10:59:26 UTC] PHP  15. Illuminate\Foundation\Application->Illuminate\Container\{closure:D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:263-271}() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:805
+[01-Mar-2021 10:59:26 UTC] PHP  16. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:269
+[01-Mar-2021 10:59:26 UTC] PHP  17. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:796
+[01-Mar-2021 10:59:26 UTC] PHP  18. Illuminate\Foundation\Application->build() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:691
+[01-Mar-2021 10:59:26 UTC] PHP  19. ReflectionClass->__construct() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 10:59:26 UTC] PHP  20. spl_autoload_call() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 10:59:26 UTC] PHP  21. Composer\Autoload\ClassLoader->loadClass() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 10:59:26 UTC] PHP  22. Composer\Autoload\includeFile() D:\Winginx\home\dev.vlearn.vn\vendor\composer\ClassLoader.php:322
+[01-Mar-2021 10:59:26 UTC] PHP  23. include() D:\Winginx\home\dev.vlearn.vn\vendor\composer\ClassLoader.php:444
+[01-Mar-2021 10:59:26 UTC] PHP Fatal error:  Uncaught ReflectionException: Class App\Exceptions\Handler does not exist in D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+Stack trace:
+#0 D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php(809): ReflectionClass->__construct('App\\Exceptions\\...')
+#1 D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php(691): Illuminate\Container\Container->build('App\\Exceptions\\...')
+#2 D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(796): Illuminate\Container\Container->resolve('App\\Exceptions\\...', Array, false)
+#3 D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php(269): Illuminate\Foundation\Application->resolve('App\\Exceptions\\...', Array, false)
+#4 D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php(805): Illuminate\Container\Container->Illuminate\C in D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php on line 811
+[01-Mar-2021 10:59:26 UTC] PHP Stack trace:
+[01-Mar-2021 10:59:26 UTC] PHP   1. {main}() D:\Winginx\home\dev.vlearn.vn\artisan:0
+[01-Mar-2021 10:59:26 UTC] PHP   2. App\Console\Kernel->handle() D:\Winginx\home\dev.vlearn.vn\artisan:37
+[01-Mar-2021 10:59:26 UTC] PHP   3. App\Console\Kernel->bootstrap() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:127
+[01-Mar-2021 10:59:26 UTC] PHP   4. Illuminate\Foundation\Application->bootstrapWith() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:310
+[01-Mar-2021 10:59:26 UTC] PHP   5. Illuminate\Foundation\Bootstrap\RegisterProviders->bootstrap() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:230
+[01-Mar-2021 10:59:26 UTC] PHP   6. Illuminate\Foundation\Application->registerConfiguredProviders() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterProviders.php:17
+[01-Mar-2021 10:59:26 UTC] PHP   7. Illuminate\Foundation\ProviderRepository->load() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:604
+[01-Mar-2021 10:59:26 UTC] PHP   8. Illuminate\Foundation\Application->register() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:75
+[01-Mar-2021 10:59:26 UTC] PHP   9. NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider->register() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:627
+[01-Mar-2021 10:59:26 UTC] PHP  10. Illuminate\Foundation\Application->make() D:\Winginx\home\dev.vlearn.vn\vendor\nunomaduro\collision\src\Adapters\Laravel\CollisionServiceProvider.php:72
+[01-Mar-2021 10:59:26 UTC] PHP  11. Illuminate\Foundation\Application->make() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:781
+[01-Mar-2021 10:59:26 UTC] PHP  12. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:637
+[01-Mar-2021 10:59:26 UTC] PHP  13. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:796
+[01-Mar-2021 10:59:26 UTC] PHP  14. Illuminate\Foundation\Application->build() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:691
+[01-Mar-2021 10:59:26 UTC] PHP  15. Illuminate\Foundation\Application->Illuminate\Container\{closure:D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:263-271}() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:805
+[01-Mar-2021 10:59:26 UTC] PHP  16. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:269
+[01-Mar-2021 10:59:26 UTC] PHP  17. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:796
+[01-Mar-2021 10:59:26 UTC] PHP  18. Illuminate\Foundation\Application->build() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:691
+[01-Mar-2021 10:59:26 UTC] PHP  19. ReflectionClass->__construct() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 10:59:26 UTC] PHP  20. spl_autoload_call() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 10:59:26 UTC] PHP  21. Composer\Autoload\ClassLoader->loadClass() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 10:59:26 UTC] PHP  22. Composer\Autoload\includeFile() D:\Winginx\home\dev.vlearn.vn\vendor\composer\ClassLoader.php:322
+[01-Mar-2021 10:59:26 UTC] PHP  23. include() D:\Winginx\home\dev.vlearn.vn\vendor\composer\ClassLoader.php:444
+[01-Mar-2021 11:00:37 UTC] PHP Fatal error:  Declaration of App\Exceptions\Handler::report(App\Exceptions\Exception $exception) must be compatible with Illuminate\Foundation\Exceptions\Handler::report(Throwable $e) in D:\Winginx\home\dev.vlearn.vn\app\Exceptions\Handler.php on line 8
+[01-Mar-2021 11:00:37 UTC] PHP Stack trace:
+[01-Mar-2021 11:00:37 UTC] PHP   1. {main}() D:\Winginx\home\dev.vlearn.vn\artisan:0
+[01-Mar-2021 11:00:37 UTC] PHP   2. App\Console\Kernel->handle() D:\Winginx\home\dev.vlearn.vn\artisan:37
+[01-Mar-2021 11:00:37 UTC] PHP   3. App\Console\Kernel->bootstrap() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:127
+[01-Mar-2021 11:00:37 UTC] PHP   4. Illuminate\Foundation\Application->bootstrapWith() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:310
+[01-Mar-2021 11:00:37 UTC] PHP   5. Illuminate\Foundation\Bootstrap\RegisterProviders->bootstrap() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:230
+[01-Mar-2021 11:00:37 UTC] PHP   6. Illuminate\Foundation\Application->registerConfiguredProviders() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterProviders.php:17
+[01-Mar-2021 11:00:37 UTC] PHP   7. Illuminate\Foundation\ProviderRepository->load() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:604
+[01-Mar-2021 11:00:37 UTC] PHP   8. Illuminate\Foundation\Application->register() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:75
+[01-Mar-2021 11:00:37 UTC] PHP   9. NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider->register() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:627
+[01-Mar-2021 11:00:37 UTC] PHP  10. Illuminate\Foundation\Application->make() D:\Winginx\home\dev.vlearn.vn\vendor\nunomaduro\collision\src\Adapters\Laravel\CollisionServiceProvider.php:72
+[01-Mar-2021 11:00:37 UTC] PHP  11. Illuminate\Foundation\Application->make() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:781
+[01-Mar-2021 11:00:37 UTC] PHP  12. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:637
+[01-Mar-2021 11:00:37 UTC] PHP  13. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:796
+[01-Mar-2021 11:00:37 UTC] PHP  14. Illuminate\Foundation\Application->build() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:691
+[01-Mar-2021 11:00:37 UTC] PHP  15. Illuminate\Foundation\Application->Illuminate\Container\{closure:D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:263-271}() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:805
+[01-Mar-2021 11:00:37 UTC] PHP  16. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:269
+[01-Mar-2021 11:00:37 UTC] PHP  17. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:796
+[01-Mar-2021 11:00:37 UTC] PHP  18. Illuminate\Foundation\Application->build() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:691
+[01-Mar-2021 11:00:37 UTC] PHP  19. ReflectionClass->__construct() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 11:00:37 UTC] PHP  20. spl_autoload_call() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 11:00:37 UTC] PHP  21. Composer\Autoload\ClassLoader->loadClass() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 11:00:37 UTC] PHP  22. Composer\Autoload\includeFile() D:\Winginx\home\dev.vlearn.vn\vendor\composer\ClassLoader.php:322
+[01-Mar-2021 11:00:37 UTC] PHP  23. include() D:\Winginx\home\dev.vlearn.vn\vendor\composer\ClassLoader.php:444
+[01-Mar-2021 11:00:37 UTC] PHP Fatal error:  Uncaught ReflectionException: Class App\Exceptions\Handler does not exist in D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+Stack trace:
+#0 D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php(809): ReflectionClass->__construct('App\\Exceptions\\...')
+#1 D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php(691): Illuminate\Container\Container->build('App\\Exceptions\\...')
+#2 D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(796): Illuminate\Container\Container->resolve('App\\Exceptions\\...', Array, false)
+#3 D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php(269): Illuminate\Foundation\Application->resolve('App\\Exceptions\\...', Array, false)
+#4 D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php(805): Illuminate\Container\Container->Illuminate\C in D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php on line 811
+[01-Mar-2021 11:00:37 UTC] PHP Stack trace:
+[01-Mar-2021 11:00:37 UTC] PHP   1. {main}() D:\Winginx\home\dev.vlearn.vn\artisan:0
+[01-Mar-2021 11:00:37 UTC] PHP   2. App\Console\Kernel->handle() D:\Winginx\home\dev.vlearn.vn\artisan:37
+[01-Mar-2021 11:00:37 UTC] PHP   3. App\Console\Kernel->bootstrap() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:127
+[01-Mar-2021 11:00:37 UTC] PHP   4. Illuminate\Foundation\Application->bootstrapWith() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php:310
+[01-Mar-2021 11:00:37 UTC] PHP   5. Illuminate\Foundation\Bootstrap\RegisterProviders->bootstrap() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:230
+[01-Mar-2021 11:00:37 UTC] PHP   6. Illuminate\Foundation\Application->registerConfiguredProviders() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterProviders.php:17
+[01-Mar-2021 11:00:37 UTC] PHP   7. Illuminate\Foundation\ProviderRepository->load() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:604
+[01-Mar-2021 11:00:37 UTC] PHP   8. Illuminate\Foundation\Application->register() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:75
+[01-Mar-2021 11:00:37 UTC] PHP   9. NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider->register() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:627
+[01-Mar-2021 11:00:37 UTC] PHP  10. Illuminate\Foundation\Application->make() D:\Winginx\home\dev.vlearn.vn\vendor\nunomaduro\collision\src\Adapters\Laravel\CollisionServiceProvider.php:72
+[01-Mar-2021 11:00:37 UTC] PHP  11. Illuminate\Foundation\Application->make() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:781
+[01-Mar-2021 11:00:37 UTC] PHP  12. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:637
+[01-Mar-2021 11:00:37 UTC] PHP  13. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:796
+[01-Mar-2021 11:00:37 UTC] PHP  14. Illuminate\Foundation\Application->build() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:691
+[01-Mar-2021 11:00:37 UTC] PHP  15. Illuminate\Foundation\Application->Illuminate\Container\{closure:D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:263-271}() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:805
+[01-Mar-2021 11:00:37 UTC] PHP  16. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:269
+[01-Mar-2021 11:00:37 UTC] PHP  17. Illuminate\Foundation\Application->resolve() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:796
+[01-Mar-2021 11:00:37 UTC] PHP  18. Illuminate\Foundation\Application->build() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:691
+[01-Mar-2021 11:00:37 UTC] PHP  19. ReflectionClass->__construct() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 11:00:37 UTC] PHP  20. spl_autoload_call() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 11:00:37 UTC] PHP  21. Composer\Autoload\ClassLoader->loadClass() D:\Winginx\home\dev.vlearn.vn\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+[01-Mar-2021 11:00:37 UTC] PHP  22. Composer\Autoload\includeFile() D:\Winginx\home\dev.vlearn.vn\vendor\composer\ClassLoader.php:322
+[01-Mar-2021 11:00:37 UTC] PHP  23. include() D:\Winginx\home\dev.vlearn.vn\vendor\composer\ClassLoader.php:444

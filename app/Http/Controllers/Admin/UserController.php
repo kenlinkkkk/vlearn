@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Role;
+use Throwable;
 
 class UserController extends Controller
 {
@@ -34,8 +35,26 @@ class UserController extends Controller
 
         $user = Auth::user();
 
-        if (Hash::check($data['password_old'], $user->getAuthPassword())) {
+        $user = Auth::user();
 
+        $data = $request->except('_token');
+        if (password_verify($data['password_old'], $user->password)) {
+            if ($data['password_new'] == $data['password_confirm']) {
+                try {
+                    $result = User::find($user->id)->update(['password' => Hash::make($data['password_new'])]);
+
+                    Auth::logout();
+                    return redirect(route('login'));
+                } catch (Throwable $exception) {
+                    report($exception);
+                }
+            } else {
+                $request->session()->flash('error', 'Mật khẩu mới không trùng nhau');
+                return redirect(route('admin.profile'));
+            }
+        } else {
+            $request->session()->flash('error', 'Mật khẩu hiện tại không chính xác');
+            return redirect(route('admin.profile'));
         }
     }
 

@@ -59,6 +59,12 @@
                                         @else
                                             <button type="submit" itemId="{{ $item->id }}" class="btn btn-success btn-sm btn-delete">Active</button>
                                         @endif
+                                        @hasanyrole('System Admin|Admin')
+                                        <form id="form-delete-{{ $item->id }}" method="post" action="{{ route('admin.lesson.destroy', [$item->id]) }}">
+                                            @csrf
+                                            <button type="submit" itemId="{{ $item->id }}" class="btn btn-danger btn-sm btn-destroy">Xóa</button>
+                                        </form>
+                                        @endhasanyrole
                                     </form>
                                 </td>
                             </tr>
@@ -95,6 +101,25 @@
             }).then((result) => {
                 if (result.value) {
                     $('#form-' + id).submit();
+                }
+            });
+        });
+
+        $("body").on("click", ".btn-destroy", function(e){
+            e.preventDefault();
+            let id = $(this).attr('itemId');
+            swal.fire({
+                title: "Bạn có chắc không?",
+                text: "Bạn sẽ không thể khôi phục lại thông tin này khi đã xóa!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Đúng! Tôi chắc chắn!",
+                cancelButtonText: "Hủy",
+                closeOnConfirm: false
+            }).then((result) => {
+                if (result.value) {
+                    $('#form-delete-' + id).submit();
                 }
             });
         });

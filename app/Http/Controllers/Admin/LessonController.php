@@ -7,6 +7,7 @@ use App\Models\Lesson;
 use App\Models\Package;
 use App\Repositories\Admin\LessonEloquentRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\Facades\Image;
 
@@ -128,6 +129,34 @@ class LessonController extends Controller
                 session()->flash('success', 'Cập nhật thành công');
             } else {
                 session()->flash('error', 'Cập nhật thất bại');
+            }
+            return Redirect::route('admin.lesson.index');
+        } catch (\Exception $exception) {
+            return report($exception);
+        }
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        try {
+            $lesson = Lesson::query()->whereKey($id)->first();
+            $pathVideo = str_replace('/','\\',public_path('/uploads/lessons'. $lesson->video));
+            $pathImg = str_replace('/','\\',public_path('/uploads/lessons/'. $lesson->image));
+            $pathImgThumb = str_replace('/','\\',public_path('/uploads/lessons/thumbnail64_'. $lesson->image));
+            $deleteFileResult = '';
+            if (File::exists($pathVideo)) {
+                $deleteFileResult = File::deletes($pathVideo, $pathImg, $pathImgThumb);
+            }
+            $result = $lesson->forceDelete();
+
+            if ($deleteFileResult) {
+                if ($result) {
+                    session()->flash('success', 'Xóa thành công');
+                } else {
+                    session()->flash('error', 'Cập nhật thất bại');
+                }
+            } else {
+                session()->flash('error', 'Xóa file thất bại');
             }
             return Redirect::route('admin.lesson.index');
         } catch (\Exception $exception) {

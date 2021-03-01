@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/create', 'Admin\LessonController@create')->name('create');
             Route::post('/update/{lesson_id}', 'Admin\LessonController@update')->name('update');
 
-            Route::middleware(['role:Admin'])->group(function () {
+            Route::middleware(['role:Admin', 'role:Super Admin'])->group(function () {
                 Route::post('/delete/{id}', 'Admin\LessonController@destroy')->name('destroy');
             });
         });

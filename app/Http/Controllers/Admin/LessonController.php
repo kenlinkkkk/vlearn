@@ -22,7 +22,7 @@ class LessonController extends Controller
     public function index(Request $request)
     {
         if (!empty($request->get('q'))) {
-            $query = $request->get('q');
+            $query = url_slug($request->get('q'));
             $lessons = Lesson::query()->where('status', '=', 1)->where('slug', $query)->with('withPackage')->paginate(10);
         } else {
             $lessons = Lesson::query()->where('status', '=', 1)->with('withPackage')->paginate(10);

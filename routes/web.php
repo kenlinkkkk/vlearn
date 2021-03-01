@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
 
         Route::post('/change-password', 'Admin\UserController@changePassword')->name('change.password');
         Route::post('/upload', 'Admin\PageController@upload')->name('upload');
+
         Route::prefix('/page')->name('page.')->group(function () {
             Route::get('/', 'Admin\PageController@index')->name('index');
             Route::get('/add', 'Admin\PageController@add')->name('add');
@@ -48,6 +49,17 @@ Route::middleware('auth')->group(function () {
 
             Route::post('/create', 'Admin\LessonController@create')->name('create');
             Route::post('/update/{lesson_id}', 'Admin\LessonController@update')->name('update');
+        });
+        Route::middleware(['role:Super Admin'])->group(function () {
+            Route::prefix('/user')->name('user.')->namespace('Admin')->group(function () {
+                Route::get('/', 'UserController@userList')->name('index');
+                Route::get('/add', 'UserController@add')->name('add');
+                Route::get('/edit/{id}', 'UserController@edit')->name('edit');
+
+                Route::post('/create', 'UserController@create')->name('create');
+                Route::post('/update/{id}', 'UserController@update')->name('update');
+                Route::post('/delete/{id}', 'UserController@destroy')->name('destroy');
+            });
         });
     });
 });

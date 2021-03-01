@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\CheckClientLogin;
 use App\Http\Middleware\CheckISDN;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Spatie\Permission\Middlewares\RoleMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -64,6 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isdn' => CheckISDN::class,
         'check.client' => CheckClientLogin::class,
+        'role' => RoleMiddleware::class,
     ];
 
     /**

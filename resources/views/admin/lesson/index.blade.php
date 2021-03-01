@@ -39,6 +39,8 @@
                             <th class="text-right">Trạng thái</th>
                             <th class="text-right">Action</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         @foreach($lessons as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
@@ -69,8 +71,9 @@
                                 </td>
                             </tr>
                         @endforeach
-                        </thead>
-                        <tbody>
+                        <tr>
+                            <td colspan="5">{{ $lessons->links() }}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

@@ -21,7 +21,7 @@ class LessonController extends Controller
 
     public function index()
     {
-        $lessons = Lesson::query()->where('status', '=', 1)->with('withPackage')->get();
+        $lessons = Lesson::query()->where('status', '=', 1)->with('withPackage')->paginate(10);
         $data = compact('lessons');
         return view('admin.lesson.index', $data);
     }

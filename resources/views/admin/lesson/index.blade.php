@@ -59,12 +59,12 @@
                                         @else
                                             <button type="submit" itemId="{{ $item->id }}" class="btn btn-success btn-sm btn-delete">Active</button>
                                         @endif
-                                        @hasanyrole('System Admin|Admin')
+                                        @hasrole('System Admin|Admin')
                                         <form id="form-delete-{{ $item->id }}" method="post" action="{{ route('admin.lesson.destroy', [$item->id]) }}">
                                             @csrf
                                             <button type="submit" itemId="{{ $item->id }}" class="btn btn-danger btn-sm btn-destroy">Xóa</button>
                                         </form>
-                                        @endhasanyrole
+                                        @endhasrole
                                     </form>
                                 </td>
                             </tr>

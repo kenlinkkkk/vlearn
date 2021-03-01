@@ -54,9 +54,9 @@
                 </button>
 
                 <!-- App Search-->
-                <form class="app-search d-none d-lg-block">
+                <form class="app-search d-none d-lg-block" method="GET">
                     <div class="position-relative">
-                        <input type="text" class="form-control" placeholder="Search...">
+                        <input type="text" class="form-control" name="q" placeholder="Search...">
                         <span class="bx bx-search-alt"></span>
                     </div>
                 </form>

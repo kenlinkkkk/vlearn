@@ -19,9 +19,14 @@ class LessonController extends Controller
         $this->lessonEloquentRepository = $lessonEloquentRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $lessons = Lesson::query()->where('status', '=', 1)->with('withPackage')->paginate(10);
+        if (!empty($request->get('q'))) {
+            $query = $request->get('q');
+            $lessons = Lesson::query()->where('status', '=', 1)->where('slug', $query)->with('withPackage')->paginate(10);
+        } else {
+            $lessons = Lesson::query()->where('status', '=', 1)->with('withPackage')->paginate(10);
+        }
         $data = compact('lessons');
         return view('admin.lesson.index', $data);
     }

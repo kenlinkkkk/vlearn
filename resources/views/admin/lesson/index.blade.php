@@ -71,11 +71,9 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @if(!empty($lessons->links()))
                         <tr>
                             <td colspan="5">{{ $lessons->links() }}</td>
                         </tr>
-                        @endif
                         </tbody>
                     </table>
                 </div>

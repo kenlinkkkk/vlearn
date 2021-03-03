@@ -185,7 +185,7 @@ class LessonController extends Controller
                 DB::rollBack();
                 session()->flash('error', 'Cập nhật thất bại');
             }
-            return Redirect::route('admin.lesson.index');
+            return Redirect::back();
         } catch (Exception $exception) {
             DB::rollBack();
             Log::debug($exception->getMessage());

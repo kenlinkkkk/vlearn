@@ -28,7 +28,7 @@ class LessonController extends Controller
             $query = '%'.url_slug($request->get('q')).'%';
             $lessons = Lesson::query()->where('status', '=', 1)->where('slug', 'like', $query)->with('withPackage')->paginate(10);
             foreach ($lessons as $lesson) {
-                $pathVideo = str_replace('/', '\\', public_path('uploads/lessons/'. $lesson->video));
+                $pathVideo = str_replace('\\', '/', public_path('uploads/lessons/'. $lesson->video));
                 if (File::exists($pathVideo)) {
                     $lesson->fileSize = number_format(File::size($pathVideo) / 1024 / 1024, 2, '.', ',');
                 } else {
@@ -38,7 +38,7 @@ class LessonController extends Controller
         } else {
             $lessons = Lesson::query()->where('status', '=', 1)->with('withPackage')->paginate(10);
             foreach ($lessons as $lesson) {
-                $pathVideo = str_replace('/', '\\', public_path('uploads/lessons/'. $lesson->video));
+                $pathVideo = str_replace('\\', '/', public_path('uploads/lessons/'. $lesson->video));
                 if (File::exists($pathVideo)) {
                     $lesson->fileSize = number_format(File::size($pathVideo) / 1024 / 1024, 2, '.', ',');
                 } else {
@@ -165,9 +165,9 @@ class LessonController extends Controller
         DB::beginTransaction();
         try {
             $lesson = Lesson::query()->whereKey($id)->first();
-            $pathVideo = str_replace('/', '\\', public_path('uploads/lessons/'. $lesson->video));
-            $pathImg = str_replace('/','\\',public_path('uploads/lessons/'. $lesson->image));
-            $pathImgThumb = str_replace('/','\\',public_path('uploads/lessons/thumbnail64_'. $lesson->image));
+            $pathVideo = str_replace('\\', '/', public_path('uploads/lessons/'. $lesson->video));
+            $pathImg = str_replace('\\','/',public_path('uploads/lessons/'. $lesson->image));
+            $pathImgThumb = str_replace('\\','/',public_path('uploads/lessons/thumbnail64_'. $lesson->image));
 
             $result = $lesson->forceDelete();
             if ($result) {

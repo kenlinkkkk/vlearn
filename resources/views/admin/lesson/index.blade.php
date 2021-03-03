@@ -36,6 +36,9 @@
                             <th>ID</th>
                             <th>Tên bài học</th>
                             <th>Khóa học</th>
+                            @hasanyrole('SAdmin|Admin')
+                            <th>Video size</th>
+                            @endhasanyrole
                             <th class="text-right">Trạng thái</th>
                             <th class="text-right">Action</th>
                         </tr>
@@ -46,12 +49,21 @@
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->withPackage->name }}</td>
+                                @hasanyrole('SAdmin|Admin')
+                                <td>{{ $item->fileSize }} MB</td>
+                                @endhasanyrole
                                 @if($item->status == 1)
                                     <td><span class="badge badge-pill badge-success float-right">Active</span></td>
                                 @else
                                     <td><span class="badge badge-pill badge-danger float-right">Inactive</span></td>
                                 @endif
-                                <td class="text-right">
+                                <td class="text-right d-flex flex-row-reverse">
+                                    @hasanyrole('SAdmin|Admin')
+                                    <form id="form-delete-{{ $item->id }}" method="post" action="{{ route('admin.lesson.destroy', [$item->id]) }}">
+                                        @csrf
+                                        <button type="submit" itemId="{{ $item->id }}" class="btn btn-danger btn-sm btn-destroy">Xóa</button>
+                                    </form>
+                                    @endhasanyrole
                                     <form id="form-{{ $item->id }}" method="post" action="{{ route('admin.lesson.update', [$item->id]) }}">
                                         @csrf
                                         <input type="hidden" name="status" value="{{ $item->status == 1 ? 0 : 1 }}">
@@ -61,12 +73,6 @@
                                         @else
                                             <button type="submit" itemId="{{ $item->id }}" class="btn btn-success btn-sm btn-delete">Active</button>
                                         @endif
-                                        @hasrole('System Admin|Admin')
-                                        <form id="form-delete-{{ $item->id }}" method="post" action="{{ route('admin.lesson.destroy', [$item->id]) }}">
-                                            @csrf
-                                            <button type="submit" itemId="{{ $item->id }}" class="btn btn-danger btn-sm btn-destroy">Xóa</button>
-                                        </form>
-                                        @endhasrole
                                     </form>
                                 </td>
                             </tr>

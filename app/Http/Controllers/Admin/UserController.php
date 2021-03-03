@@ -35,8 +35,6 @@ class UserController extends Controller
 
         $user = Auth::user();
 
-        $user = Auth::user();
-
         $data = $request->except('_token');
         if (password_verify($data['password_old'], $user->password)) {
             if ($data['password_new'] == $data['password_confirm']) {

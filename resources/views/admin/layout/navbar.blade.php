@@ -33,7 +33,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('admin.profile') }}">Thông tin cá nhân</a></li>
-                        @role('Super Admin')
+                        @role('SAdmin')
                         <li><a href="{{ route('admin.user.index') }}">Danh sách tài khoản</a></li>
                         @endrole
                     </ul>

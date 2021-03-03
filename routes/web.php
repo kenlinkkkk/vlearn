@@ -50,12 +50,12 @@ Route::middleware('auth')->group(function () {
             Route::post('/create', 'Admin\LessonController@create')->name('create');
             Route::post('/update/{lesson_id}', 'Admin\LessonController@update')->name('update');
 
-            Route::middleware(['role:Admin', 'role:Super Admin'])->group(function () {
+            Route::middleware(['role:SAdmin|Admin'])->group(function () {
                 Route::post('/delete/{id}', 'Admin\LessonController@destroy')->name('destroy');
             });
         });
 
-        Route::middleware(['role:Super Admin'])->group(function () {
+        Route::middleware(['role:SAdmin'])->group(function () {
             Route::prefix('/user')->name('user.')->namespace('Admin')->group(function () {
                 Route::get('/', 'UserController@userList')->name('index');
                 Route::get('/add', 'UserController@add')->name('add');

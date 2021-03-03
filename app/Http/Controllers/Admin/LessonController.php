@@ -7,8 +7,11 @@ use App\Models\Lesson;
 use App\Models\Package;
 use App\Repositories\Admin\LessonEloquentRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class LessonController extends Controller
@@ -24,8 +27,24 @@ class LessonController extends Controller
         if (!empty($request->get('q'))) {
             $query = '%'.url_slug($request->get('q')).'%';
             $lessons = Lesson::query()->where('status', '=', 1)->where('slug', 'like', $query)->with('withPackage')->paginate(10);
+            foreach ($lessons as $lesson) {
+                $pathVideo = str_replace('/', '\\', public_path('uploads/lessons/'. $lesson->video));
+                if (File::exists($pathVideo)) {
+                    $lesson->fileSize = number_format(File::size($pathVideo) / 1024 / 1024, 2, '.', ',');
+                } else {
+                    $lesson->fileSize = 0;
+                }
+            }
         } else {
             $lessons = Lesson::query()->where('status', '=', 1)->with('withPackage')->paginate(10);
+            foreach ($lessons as $lesson) {
+                $pathVideo = str_replace('/', '\\', public_path('uploads/lessons/'. $lesson->video));
+                if (File::exists($pathVideo)) {
+                    $lesson->fileSize = number_format(File::size($pathVideo) / 1024 / 1024, 2, '.', ',');
+                } else {
+                    $lesson->fileSize = 0;
+                }
+            }
         }
         $data = compact('lessons');
         return view('admin.lesson.index', $data);
@@ -143,28 +162,33 @@ class LessonController extends Controller
 
     public function destroy(Request $request, $id)
     {
+        DB::beginTransaction();
         try {
             $lesson = Lesson::query()->whereKey($id)->first();
-            $pathVideo = str_replace('/','\\',public_path('/uploads/lessons'. $lesson->video));
-            $pathImg = str_replace('/','\\',public_path('/uploads/lessons/'. $lesson->image));
-            $pathImgThumb = str_replace('/','\\',public_path('/uploads/lessons/thumbnail64_'. $lesson->image));
-            $deleteFileResult = '';
-            if (File::exists($pathVideo)) {
-                $deleteFileResult = File::deletes($pathVideo, $pathImg, $pathImgThumb);
-            }
-            $result = $lesson->forceDelete();
+            $pathVideo = str_replace('/', '\\', public_path('uploads/lessons/'. $lesson->video));
+            $pathImg = str_replace('/','\\',public_path('uploads/lessons/'. $lesson->image));
+            $pathImgThumb = str_replace('/','\\',public_path('uploads/lessons/thumbnail64_'. $lesson->image));
 
-            if ($deleteFileResult) {
-                if ($result) {
+            $result = $lesson->forceDelete();
+            if ($result) {
+                $deleteVideoResult = File::delete($pathVideo);
+                $deleteImgResult = File::delete($pathImg);
+                $deleteImgThumbResult = File::delete($pathImgThumb);
+                if ($deleteVideoResult && $deleteImgResult && $deleteImgThumbResult) {
+                    DB::commit();
                     session()->flash('success', 'Xóa thành công');
                 } else {
-                    session()->flash('error', 'Cập nhật thất bại');
+                    DB::rollBack();
+                    session()->flash('error', 'Lỗi xóa file');
                 }
             } else {
-                session()->flash('error', 'Xóa file thất bại');
+                DB::rollBack();
+                session()->flash('error', 'Cập nhật thất bại');
             }
             return Redirect::route('admin.lesson.index');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
+            DB::rollBack();
+            Log::debug($exception->getMessage());
             return report($exception);
         }
     }
